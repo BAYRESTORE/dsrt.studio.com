@@ -1,140 +1,101 @@
 <!DOCTYPE html>
 <html lang="id">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>DSRT Studio</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background: white;
-      color: #111;
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-    }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DSRT Studio</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  </head>
+  <body class="bg-black text-white font-sans">
+    <!-- Navbar -->
+    <nav class="flex items-center justify-between px-6 py-4 border-b border-yellow-500">
+      <div class="text-2xl font-bold text-yellow-400">
+        <img src="logo.png" alt="DSRT Logo" class="h-8 inline-block mr-2 align-middle" /> DSRT Studio
+      </div>
+      <div class="space-x-6 hidden md:flex">
+        <a href="#restore" class="hover:text-yellow-400">Restore</a>
+        <a href="#manual" class="hover:text-yellow-400">Manual + One Tap</a>
+        <a href="#logo" class="hover:text-yellow-400">Logo</a>
+        <a href="#keamanan" class="hover:text-yellow-400">Keamanan</a>
+        <a href="#about" class="hover:text-yellow-400">Tentang</a>
+      </div>
+    </nav>
 
-    header {
-      width: 100%;
-      padding: 1rem 2rem;
-      display: flex;
-      justify-content: flex-end;
-      background: #f9f9f9;
-      box-shadow: 0 1px 5px rgba(0,0,0,0.1);
-    }
+    <!-- Hero Section -->
+    <section class="text-center py-20 px-4 bg-gradient-to-b from-black via-zinc-900 to-black">
+      <h1 class="text-5xl font-extrabold text-yellow-400 mb-4">DSRT Studio</h1>
+      <p class="text-lg max-w-2xl mx-auto mb-8 text-gray-300">
+        Studio kreatif untuk desain visual dan teknologi restorasi digital profesional.
+      </p>
+      <button class="bg-yellow-500 hover:bg-yellow-600 text-black px-6 py-3 rounded-xl font-semibold">
+        Mulai Uji Coba Gratis
+      </button>
+    </section>
 
-    .login-button {
-      padding: 0.5rem 1rem;
-      background: #222;
-      color: white;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-    }
+    <!-- Upload Section -->
+    <section class="py-16 px-4 text-center" id="restore">
+      <h2 class="text-3xl font-semibold text-yellow-400 mb-4">Unggah Foto Lama Anda</h2>
+      <p class="text-gray-400 mb-6">Kami akan merestorasinya secara otomatis menggunakan teknologi DSRT.</p>
+      <input type="file" class="mb-4 text-white file:bg-yellow-500 file:text-black file:rounded file:px-4 file:py-2" />
+      <br />
+      <button class="mt-4 bg-yellow-500 hover:bg-yellow-600 text-black px-5 py-2 rounded-lg font-medium">
+        Unggah & Mulai
+      </button>
+    </section>
 
-    .main {
-      text-align: center;
-      padding: 2rem;
-      flex: 1;
-    }
+    <!-- Fitur Unggulan -->
+    <section class="py-20 px-6 bg-zinc-900" id="manual">
+      <h2 class="text-3xl font-bold text-center text-yellow-400 mb-10">Fitur Unggulan</h2>
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 text-center">
+        <div>
+          <h3 class="text-xl font-semibold mb-2">Restore Otomatis</h3>
+          <p class="text-gray-400 text-sm">Foto buram, rusak, dan kusam bisa hidup kembali.</p>
+        </div>
+        <div>
+          <h3 class="text-xl font-semibold mb-2">Manual + One Tap</h3>
+          <p class="text-gray-400 text-sm">Atur hasil akhir secara detail atau otomatis instan.</p>
+        </div>
+        <div>
+          <h3 class="text-xl font-semibold mb-2">Desain Logo</h3>
+          <p class="text-gray-400 text-sm">Buat logo profesional: monogram, kombinasi, maskot, dll.</p>
+        </div>
+        <div>
+          <h3 class="text-xl font-semibold mb-2">Keamanan Gambar</h3>
+          <p class="text-gray-400 text-sm">Privasi terjaga, QR hash, watermark, dan perlindungan data.</p>
+        </div>
+      </div>
+    </section>
 
-    .logo {
-      max-width: 220px;
-      height: auto;
-      margin: 1rem auto;
-    }
+    <!-- Tentang Kami -->
+    <section class="py-20 px-4 text-center" id="about">
+      <h2 class="text-3xl font-bold text-yellow-400 mb-4">Tentang Kami</h2>
+      <p class="max-w-2xl mx-auto text-gray-300">
+        DSRT Studio adalah tim kreatif yang fokus pada desain, branding, dan teknologi restorasi foto digital. Kami menggabungkan kecanggihan AI dengan estetika visual untuk solusi desain yang elegan.
+      </p>
+    </section>
 
-    h1 {
-      font-size: 2.5rem;
-      margin-bottom: 0.5rem;
-    }
+    <!-- Kontak Admin WhatsApp -->
+    <section class="py-12 text-center">
+      <h3 class="text-2xl font-semibold text-yellow-400 mb-2">Hubungi Admin</h3>
+      <p class="text-gray-400 mb-4">Admin siap bantu 24 jam melalui WhatsApp</p>
+      <a href="https://wa.me/6287838441426" target="_blank"
+         class="inline-block bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg">
+         WhatsApp Admin
+      </a>
+    </section>
 
-    .subheading {
-      font-size: 1.2rem;
-      margin-bottom: 2rem;
-    }
+    <!-- CTA Akhir -->
+    <section class="bg-yellow-500 py-12 text-black text-center">
+      <h2 class="text-2xl font-bold mb-3">Mulai Sekarang Gratis</h2>
+      <p class="mb-4">Tanpa watermark. Uji coba langsung. Privasi 100% aman.</p>
+      <button class="bg-black text-yellow-400 px-6 py-3 rounded-xl font-semibold hover:bg-gray-900">
+        Coba Sekarang
+      </button>
+    </section>
 
-    .trial-button {
-      padding: 0.75rem 1.5rem;
-      background: #222;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      font-size: 1rem;
-      cursor: pointer;
-    }
-
-    #uji-coba {
-      padding: 2rem;
-      text-align: center;
-    }
-
-    footer {
-      background: #f5f5f5;
-      text-align: center;
-      padding: 2rem;
-      font-size: 0.9rem;
-    }
-
-    .theme-toggle {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: #222;
-      color: white;
-      padding: 10px;
-      border-radius: 50%;
-      border: none;
-      cursor: pointer;
-      font-size: 1.2rem;
-    }
-  </style>
-</head>
-<body>
-  <header>
-    <button class="login-button" onclick="toggleLogin()">Login</button>
-  </header>
-
-  <main class="main">
-    <img src="logo.png" alt="Logo DSRT Studio" class="logo" />
-    <h1>DSRT Studio</h1>
-    <p class="subheading">Studio kreatif untuk desain visual dan branding profesional.</p>
-    <button class="trial-button" onclick="scrollToTrial()">Free Trial</button>
-  </main>
-
-  <section id="uji-coba">
-    <h2>Mulai Uji Coba Gratis</h2>
-    <p>Unggah foto lama Anda untuk direstorasi otomatis menggunakan teknologi DSRT.</p>
-    <form onsubmit="alert('Simulasi: file diunggah!'); return false;">
-      <input type="file" accept="image/*" required />
-      <br><br>
-      <button type="submit" class="trial-button">Unggah & Mulai</button>
-    </form>
-  </section>
-
-  <footer>
-    <p><strong>Tentang Kami:</strong> DSRT Studio adalah tim kreatif yang fokus pada desain, branding, dan teknologi restorasi foto digital.</p>
-    <p>© 2025 DSRT Studio. All rights reserved.</p>
-  </footer>
-
-  <button class="theme-toggle" onclick="toggleTheme()">🎨</button>
-
-  <script>
-    function toggleLogin() {
-      alert('Form login email (simulasi)');
-    }
-
-    function scrollToTrial() {
-      document.getElementById("uji-coba").scrollIntoView({ behavior: "smooth" });
-    }
-
-    function toggleTheme() {
-      const isDark = document.body.style.background === "black";
-      document.body.style.background = isDark ? "white" : "black";
-      document.body.style.color = isDark ? "#111" : "white";
-    }
-  </script>
-</body>
+    <!-- Footer -->
+    <footer class="text-center py-6 text-sm text-gray-500 bg-black border-t border-yellow-500">
+      © 2025 DSRT Studio. All rights reserved.
+    </footer>
+  </body>
 </html>
