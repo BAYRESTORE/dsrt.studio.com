@@ -3,62 +3,122 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>DSRT Studio – Restore Foto Rusak dengan AI</title>
+  <title>DSRT Studio – Restore</title>
   <style>
     body {
       margin: 0;
       font-family: 'Segoe UI', sans-serif;
       background: #0e0e0e;
-      color: white;
+      color: #fff;
       text-align: center;
+      padding: 40px 20px;
     }
-    .container {
-      max-width: 800px;
-      margin: auto;
-      padding: 2rem;
+
+    .logo {
+      max-width: 200px;
+      margin: 0 auto 30px;
     }
-    img {
-      max-width: 100%;
-      border-radius: 10px;
+
+    h1 {
+      font-size: 2.4rem;
+      color: #f0c040;
+      margin-bottom: 10px;
     }
-    .btn {
-      background-color: #ffcc00;
-      color: black;
-      padding: 0.8rem 1.5rem;
-      font-weight: bold;
-      font-size: 1rem;
-      border: none;
-      border-radius: 10px;
-      margin: 1rem 0;
+
+    p {
+      color: #ccc;
+      margin-bottom: 40px;
+    }
+
+    .slider-container {
+      position: relative;
+      max-width: 600px;
+      margin: 0 auto 40px;
+      overflow: hidden;
+      border-radius: 12px;
+      box-shadow: 0 0 10px #000;
+    }
+
+    .slider-container img {
+      width: 100%;
+      height: auto;
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      transition: clip-path 0.3s ease;
+    }
+
+    .slider {
+      width: 100%;
+      margin-top: 20px;
+    }
+
+    .slider-track {
+      appearance: none;
+      width: 100%;
+      height: 6px;
+      background: #444;
+      outline: none;
+      border-radius: 3px;
+    }
+
+    .slider-track::-webkit-slider-thumb {
+      appearance: none;
+      width: 18px;
+      height: 18px;
+      background: #f0c040;
+      border-radius: 50%;
       cursor: pointer;
+      border: 2px solid #fff;
+      margin-top: -6px;
     }
-    .preview {
-      display: flex;
-      justify-content: space-between;
-      gap: 1rem;
-      margin-top: 1rem;
-      flex-wrap: wrap;
+
+    footer {
+      margin-top: 40px;
+      color: #aaa;
+      font-size: 0.9rem;
     }
-    .preview img {
-      width: 48%;
+
+    footer a {
+      color: #f0c040;
+      text-decoration: none;
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <img src="https://cacwogekvnrrmmnjtmql.supabase.co/storage/v1/object/public/restore/logo-dsrt.png" alt="DSRT Logo" width="150" style="margin-bottom: 1rem;" />
-    <h1>Selamat Datang di <br>DSRT Studio</h1>
-    <p>Platform canggih untuk merestore foto lama atau rusak menggunakan teknologi AI.</p>
-    <a href="https://dsrt-soft.vercel.app" class="btn">Unggah & Mulai Restore</a>
 
-    <h2>Preview Sebelum & Sesudah</h2>
-    <div class="preview">
-      <img src="https://cacwogekvnrrmmnjtmql.supabase.co/storage/v1/object/public/restore/preview-before.jpg" alt="Sebelum Restore">
-      <img src="https://cacwogekvnrrmmnjtmql.supabase.co/storage/v1/object/public/restore/preview-after.jpg" alt="Sesudah Restore">
-    </div>
+  <img src="https://cacwogekvnrrmmnjtmql.supabase.co/storage/v1/object/public/restore/logo-dsrt.png" alt="Logo DSRT" class="logo"/>
 
-    <h2 style="margin-top: 3rem;">Galeri Hasil Restore Lainnya</h2>
-    <p>Galeri 1 | Galeri 2 | Galeri 3 | Galeri 4</p>
+  <h1>DSRT Studio – Restore</h1>
+  <p>Lihat hasil perbandingan restorasi secara langsung.</p>
+
+  <div class="slider-container" id="sliderContainer">
+    <img src="https://cacwogekvnrrmmnjtmql.supabase.co/storage/v1/object/public/restore/preview-before.jpg" alt="Before" style="z-index: 1;" />
+    <img id="afterImage" src="https://cacwogekvnrrmmnjtmql.supabase.co/storage/v1/object/public/restore/preview-after.jpg" alt="After" style="z-index: 2;" />
   </div>
+
+  <input type="range" min="0" max="100" value="50" class="slider slider-track" id="slider" />
+
+  <footer>
+    © DSRT Studio 2025 &nbsp;•&nbsp;
+    <a href="https://wa.me/6287838441426">Hubungi Admin</a>
+  </footer>
+
+  <script>
+    const afterImage = document.getElementById('afterImage');
+    const slider = document.getElementById('slider');
+
+    function updateSlider(value) {
+      afterImage.style.clipPath = `inset(0 ${100 - value}% 0 0)`;
+    }
+
+    slider.addEventListener('input', () => {
+      updateSlider(slider.value);
+    });
+
+    updateSlider(slider.value); // inisialisasi
+  </script>
+
 </body>
 </html>
