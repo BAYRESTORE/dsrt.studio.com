@@ -1,10 +1,10 @@
 <section class="gallery">
-  <h2>Preview Restore DSRT</h2>
-  <div class="slider-container">
-    <div class="slider">
-      <img src="https://cacwogekvnrrmmnjtmql.supabase.co/storage/v1/object/public/restore/preview-before.jpg" alt="Sebelum Restore" class="img-before" />
-      <img src="https://cacwogekvnrrmmnjtmql.supabase.co/storage/v1/object/public/restore/preview-after.jpg" alt="Sesudah Restore" class="img-after" />
-      <div class="slider-handle" id="handle"></div>
+  <h2 style="margin-bottom: 20px;">Preview Restore DSRT</h2>
+  <div class="slider-wrapper">
+    <div class="slider-container" id="sliderContainer">
+      <img src="https://cacwogekvnrrmmnjtmql.supabase.co/storage/v1/object/public/restore/preview-before.jpg" alt="Sebelum" class="slider-img before">
+      <img src="https://cacwogekvnrrmmnjtmql.supabase.co/storage/v1/object/public/restore/preview-after.jpg" alt="Sesudah" class="slider-img after" id="afterImage">
+      <div class="slider-handle" id="sliderHandle"></div>
     </div>
   </div>
 </section>
@@ -12,86 +12,83 @@
 <style>
 .gallery {
   width: 90%;
-  max-width: 800px;
-  margin: 60px auto;
+  max-width: 900px;
+  margin: 80px auto;
   text-align: center;
+}
+
+.slider-wrapper {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 16px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.4);
 }
 
 .slider-container {
   position: relative;
   width: 100%;
-  overflow: hidden;
-  border-radius: 16px;
-  box-shadow: 0 0 20px rgba(0,0,0,0.3);
-}
-
-.slider {
-  position: relative;
-  width: 100%;
   height: auto;
+  cursor: ew-resize;
 }
 
-.slider img {
+.slider-img {
   display: block;
   width: 100%;
   height: auto;
   object-fit: cover;
-  user-select: none;
   pointer-events: none;
 }
 
-.img-before {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
+.slider-img.before {
+  position: relative;
   z-index: 1;
 }
 
-.img-after {
+.slider-img.after {
   position: absolute;
   top: 0;
   left: 0;
-  width: 50%;
-  overflow: hidden;
-  clip-path: inset(0 50% 0 0);
   z-index: 2;
+  width: 100%;
+  height: auto;
+  clip-path: inset(0 50% 0 0);
+  transition: clip-path 0.05s ease;
 }
 
 .slider-handle {
   position: absolute;
   top: 0;
   left: 50%;
+  z-index: 3;
   width: 4px;
   height: 100%;
-  background: #f0c040;
-  z-index: 3;
-  cursor: ew-resize;
+  background-color: #f0c040;
 }
 </style>
 
 <script>
-const handle = document.getElementById('handle');
-const imgAfter = document.querySelector('.img-after');
-const slider = document.querySelector('.slider');
+const container = document.getElementById('sliderContainer');
+const handle = document.getElementById('sliderHandle');
+const afterImage = document.getElementById('afterImage');
 
-slider.addEventListener('mousemove', (e) => {
-  const bounds = slider.getBoundingClientRect();
-  let x = e.clientX - bounds.left;
-  if (x < 0) x = 0;
-  if (x > bounds.width) x = bounds.width;
+function updateSlider(x) {
+  const bounds = container.getBoundingClientRect();
+  let offsetX = x - bounds.left;
+  offsetX = Math.max(0, Math.min(offsetX, bounds.width));
 
-  handle.style.left = x + 'px';
-  imgAfter.style.clipPath = `inset(0 ${100 - (x / bounds.width * 100)}% 0 0)`;
+  const percentage = (offsetX / bounds.width) * 100;
+  handle.style.left = percentage + '%';
+  afterImage.style.clipPath = `inset(0 ${100 - percentage}% 0 0)`;
+}
+
+container.addEventListener('mousemove', (e) => {
+  updateSlider(e.clientX);
 });
 
-slider.addEventListener('touchmove', (e) => {
-  const bounds = slider.getBoundingClientRect();
-  let x = e.touches[0].clientX - bounds.left;
-  if (x < 0) x = 0;
-  if (x > bounds.width) x = bounds.width;
-
-  handle.style.left = x + 'px';
-  imgAfter.style.clipPath = `inset(0 ${100 - (x / bounds.width * 100)}% 0 0)`;
+container.addEventListener('touchmove', (e) => {
+  if (e.touches.length > 0) {
+    updateSlider(e.touches[0].clientX);
+  }
 });
-      </script>
+</script>
