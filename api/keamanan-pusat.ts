@@ -1,40 +1,49 @@
-// File: api/keamanan.ts
-import { serve } from "https://deno.land/std@0.177.0/http/server.ts";
-import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+// keamanan-pusat.js
+import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
 
-serve(async (req) => {
-  const supabase = createClient(
-    Deno.env.get("SUPABASE_URL")!,
-    Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!
-  );
+const supabase = createClient(
+  'https://cacwogekvnrrmmnjtmql.supabase.co',
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNhY3dvZ2Vrdm5ycm1tbmp0bXFsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQwMjIzODUsImV4cCI6MjA2OTU5ODM4NX0.tgGrAt8ARa9KCsfx77OxFK3GOyaNozDX1qPs1uRnUbw'
+);
 
-  const token = req.headers.get("x-dsrt-token");
-
-  // Blokir jika tidak ada token
-  if (!token) {
-    return new Response(JSON.stringify({ status: "unauthorized" }), {
-      status: 401,
-    });
+export async function keamananPusat(fitur) {
+  const user = supabase.auth.getUser ? (await supabase.auth.getUser()).data.user : null;
+  if (!user) {
+    alert("❌ Anda belum login.");
+    window.location.href = "index.html";
+    return { status: false };
   }
 
-  // Cek validitas token Supabase Auth
-  const { data: userData, error: authError } = await supabase.auth.getUser(token);
-  if (authError || !userData.user) {
-    return new Response(JSON.stringify({ status: "invalid_token" }), {
-      status: 403,
-    });
-  }
+  const email = user.email;
 
-  const userId = userData.user.id;
-
-  // Ambil data pengguna
-  const { data: pengguna, error: dbError } = await supabase
-    .from("pengguna")
-    .select("status, sisa_restore")
-    .eq("id", userId)
+  // Ambil status akun user
+  const { data: profile, error } = await supabase
+    .from('users')
+    .select('is_premium, quota_left')
+    .eq('email', email)
     .single();
 
-  if (dbError || !pengguna) {
+  if (error || !profile) {
+    alert("⚠️ Gagal cek status akun.");
+    return { status: false };
+  }
+
+  if (!profile.is_premium) {
+    if (profile.quota_left <= 0) {
+      alert("⛔ Kuota gratis habis. Silakan upgrade.");
+      return { status: false };
+    }
+
+    // Potong kuota pakai fungsi Supabase SQL
+    await supabase.rpc('kurangi_kuota', { email_input: email });
+  }
+
+  return {
+    status: true,
+    premium: profile.is_premium,
+    fitur: fitur
+  };
+}  if (dbError || !pengguna) {
     return new Response(JSON.stringify({ status: "user_not_found" }), {
       status: 404,
     });
