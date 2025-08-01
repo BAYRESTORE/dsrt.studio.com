@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Restore Foto – DSRT Studio</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #0e0e0e;
+      color: #fff;
+      text-align: center;
+      padding: 20px;
+    }
+
+    h1 {
+      color: #f0c040;
+    }
+
+    input[type="file"] {
+      margin: 20px 0;
+      background: #222;
+      color: #fff;
+      padding: 10px;
+      border-radius: 6px;
+    }
+
+    .preview-area, .result-area {
+      margin-top: 30px;
+    }
+
+    img {
+      max-width: 100%;
+      border-radius: 12px;
+    }
+
+    .download-btn {
+      background: #f0c040;
+      border: none;
+      padding: 10px 20px;
+      margin-top: 20px;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .watermark {
+      position: absolute;
+      bottom: 12px;
+      right: 12px;
+      background: rgba(0, 0, 0, 0.6);
+      padding: 6px 12px;
+      font-size: 0.9em;
+      border-radius: 8px;
+    }
+
+    .locked {
+      filter: blur(3px);
+      position: relative;
+    }
+
+    .locked::after {
+      content: '🔒 Upgrade diperlukan';
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(0, 0, 0, 0.7);
+      padding: 12px 20px;
+      border-radius: 8px;
+      color: #fff;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Restore Foto</h1>
+  <p>Unggah foto rusak kamu dan lihat hasilnya langsung</p>
+
+  <input type="file" id="uploadInput" accept="image/*" />
+  
+  <div class="preview-area" id="previewArea">
+    <!-- Gambar preview akan muncul di sini -->
+  </div>
+
+  <div class="result-area" id="resultArea">
+    <!-- Hasil restore muncul di sini -->
+  </div>
+
+  <script type="module">
+    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm'
+
+    const supabaseUrl = 'https://cacwogekvnrrmmnjtmql.supabase.co'
+    const supabaseKey = 'YOUR_PUBLIC_ANON_KEY' // Ganti dengan anon key kamu
+    const supabase = createClient(supabaseUrl, supabaseKey)
+
+    const uploadInput = document.getElementById('uploadInput')
+    const previewArea = document.getElementById('previewArea')
+    const resultArea = document.getElementById('resultArea')
+
+    let removeCount = parseInt(localStorage.getItem('removeWatermark') || '0')
+
+    uploadInput.addEventListener('change', async () => {
+      const file = uploadInput.files[0]
+      if (!file) return
+
+      const fileName = `${Date.now()}-${file.name}`
+      const { data, error } = await supabase.storage
+        .from('restore')
+        .upload(fileName, file)
+
+      if (error) {
+        alert('Gagal mengunggah gambar')
+        return
+      }
+
+      const { data: urlData } = supabase.storage
+        .from('restore')
+        .getPublicUrl(fileName)
+
+      const originalUrl = urlData.publicUrl
+
+      // Tampilkan preview
+      previewArea.innerHTML = `<h3>Gambar Asli:</h3><img src="${originalUrl}" />`
+
+      // Simulasi proses restore (5 detik loading)
+      resultArea.innerHTML = `<h3>Memproses...</h3>`
+      await new Promise(resolve => setTimeout(resolve, 5000))
+
+      // Simulasi hasil restore (menggunakan hasil sama)
+      const restoredUrl = originalUrl // ganti jika punya model real
+
+      let watermarked = `
+        <div style="position:relative; display:inline-block;">
+          <img src="${restoredUrl}" class="${removeCount >= 3 ? 'locked' : ''}" />
+          ${removeCount >= 3 ? '' : '<div class="watermark">DSRT Studio</div>'}
+        </div>
+        <br>
+        <button class="download-btn" onclick="downloadImage('${restoredUrl}')">Download / Cetak</button>
+      `
+
+      if (removeCount < 3) {
+        watermarked += `<br><button class="download-btn" onclick="removeWM()">Hapus Watermark (${3 - removeCount}x tersisa)</button>`
+      }
+
+      resultArea.innerHTML = `<h3>Hasil Restore:</h3>${watermarked}`
+    })
+
+    window.removeWM = () => {
+      removeCount++
+      localStorage.setItem('removeWatermark', removeCount)
+      location.reload()
+    }
+
+    window.downloadImage = (url) => {
+      const a = document.createElement('a')
+      a.href = url
+      a.download = 'hasil-restore.jpg'
+      a.click()
+    }
+  </script>
+</body>
+</html>
