@@ -46,13 +46,6 @@
       margin-bottom: 1.5rem;
       color: #444;
     }
-    .upload-section {
-      margin-top: 2rem;
-    }
-    input[type="file"] {
-      padding: 0.5rem;
-      border-radius: 6px;
-    }
     .slider-container {
       margin-top: 3rem;
       position: relative;
@@ -61,8 +54,8 @@
       margin-right: auto;
     }
     .slider-wrapper {
-      display: flex;
       position: relative;
+      width: 100%;
       height: 400px;
       overflow: hidden;
       border-radius: 12px;
@@ -70,10 +63,52 @@
     }
     .slider-wrapper img {
       width: 100%;
+      height: 100%;
       object-fit: cover;
-      transition: 0.5s ease-in-out;
-    }
-    .slider-wrapper img.after {
       position: absolute;
       top: 0;
-      left
+      left: 0;
+    }
+    .slider-wrapper .after {
+      clip-path: inset(0 50% 0 0);
+      transition: clip-path 0.3s ease;
+    }
+    input[type="range"] {
+      width: 100%;
+      margin-top: 1rem;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <img src="https://cacwogekvnrrmmnjtmql.supabase.co/storage/v1/object/public/restore//logo-dsrt.png" class="logo" alt="Logo DSRT" />
+    <button class="login-btn" onclick="location.href='register.html'">Masuk / Daftar</button>
+  </header>
+
+  <main>
+    <h1>Digital Smart Remaster Technology</h1>
+    <h2>Uji teknologi restorasi kami secara langsung</h2>
+
+    <div class="slider-container">
+      <div class="slider-wrapper" id="slider">
+        <img src="https://cacwogekvnrrmmnjtmql.supabase.co/storage/v1/object/public/restore//preview-before.jpg" alt="Before" />
+        <img src="https://cacwogekvnrrmmnjtmql.supabase.co/storage/v1/object/public/restore//preview-after.jpg" class="after" alt="After" id="afterImage" />
+      </div>
+      <input type="range" min="0" max="100" value="50" id="sliderRange" />
+    </div>
+  </main>
+
+  <script>
+    const slider = document.getElementById('slider');
+    const afterImage = document.getElementById('afterImage');
+    const sliderRange = document.getElementById('sliderRange');
+
+    sliderRange.addEventListener('input', (e) => {
+      const value = e.target.value;
+      afterImage.style.clipPath = `inset(0 ${100 - value}% 0 0)`;
+    });
+  </script>
+
+</body>
+</html>
