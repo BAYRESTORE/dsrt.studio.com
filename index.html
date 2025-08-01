@@ -14,9 +14,9 @@
       flex-direction: column;
       align-items: center;
       min-height: 100vh;
-      background: linear-gradient(270deg, #0e0e0e, #1c1c1c, #222222, #0e0e0e);
-      background-size: 600% 600%;
-      animation: bgShift 15s ease infinite;
+      background: linear-gradient(-45deg, #0f2027, #203a43, #2c5364, #0f2027);
+      background-size: 400% 400%;
+      animation: bgShift 20s ease infinite;
     }
 
     @keyframes bgShift {
@@ -85,6 +85,21 @@
     .features button:hover {
       background: #555;
     }
+
+    .theme-button {
+      margin-top: 20px;
+      background: #f0c040;
+      color: #000;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .theme-button:hover {
+      background: #ffd966;
+    }
   </style>
 </head>
 <body>
@@ -110,6 +125,8 @@
     <button onclick="location.href='https://dsrt-soft.vercel.app/logo'">🖋️ Buka Desain Logo</button>
   </div>
 
+  <button class="theme-button" onclick="changeTheme()">🎨 Ganti Warna Tema</button>
+
   <footer style="margin-top: 60px; text-align: center; font-size: 0.9rem; color: #aaa;">
     <div style="border-top: 1px solid #333; padding-top: 16px;">
       © DSRT 2025 &nbsp;•&nbsp;
@@ -120,10 +137,27 @@
   </footer>
 
   <script>
+    // Redirect setelah daftar
     document.getElementById('register-form').addEventListener('submit', function(e) {
       e.preventDefault();
       window.location.href = "https://dsrt-soft.vercel.app";
     });
+
+    // Tombol ubah warna tema
+    const themes = [
+      'linear-gradient(-45deg, #0f2027, #203a43, #2c5364, #0f2027)',
+      'linear-gradient(-45deg, #1a1a1a, #2e2e2e, #444, #1a1a1a)',
+      'linear-gradient(-45deg, #3a1c71, #d76d77, #ffaf7b)',
+      'linear-gradient(-45deg, #1f4037, #99f2c8)',
+    ];
+    let currentTheme = 0;
+
+    function changeTheme() {
+      currentTheme = (currentTheme + 1) % themes.length;
+      document.body.style.background = themes[currentTheme];
+      document.body.style.backgroundSize = '400% 400%';
+      document.body.style.animation = 'bgShift 20s ease infinite';
+    }
   </script>
 
 </body>
