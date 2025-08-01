@@ -49,32 +49,52 @@
       color: #f0c040;
     }
 
-    .slider-wrapper {
+    .slider-container {
       max-width: 400px;
       width: 100%;
       margin: 40px auto;
       position: relative;
-      aspect-ratio: 3 / 4;
     }
 
-    .slider-wrapper img {
+    .slider-image-wrapper {
+      position: relative;
       width: 100%;
-      height: 100%;
-      object-fit: cover;
+      overflow: hidden;
+      cursor: ew-resize;
       border-radius: 12px;
+      aspect-ratio: 3/4;
+    }
+
+    .slider-image-wrapper img {
+      width: 100%;
       position: absolute;
       top: 0;
       left: 0;
+      height: 100%;
+      object-fit: cover;
+      user-select: none;
     }
 
-    .slider-wrapper .after {
+    .slider-image-wrapper img.before {
+      z-index: 1;
+    }
+
+    .slider-image-wrapper img.after {
+      z-index: 2;
       clip-path: inset(0 50% 0 0);
-      transition: clip-path 0.3s;
+      transition: clip-path 0.1s;
     }
 
-    .slider-bar {
-      width: 100%;
-      margin-top: 220px;
+    .slider-handle {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      width: 4px;
+      background: #f0c040;
+      z-index: 3;
+      transform: translateX(-2px);
+      pointer-events: none;
     }
 
     .actions {
@@ -102,7 +122,6 @@
       background: #111;
     }
 
-    /* Login Popup */
     #login-popup {
       display: none;
       position: fixed;
@@ -155,10 +174,12 @@
     <h1>Digital Smart Remaster Technology</h1>
     <p>Preview hasil sebelum dan sesudah secara langsung</p>
 
-    <div class="slider-wrapper">
-      <img src="https://cacwogekvnrrmmnjtmql.supabase.co/storage/v1/object/public/restore/preview-before.jpg" alt="Before">
-      <img src="https://cacwogekvnrrmmnjtmql.supabase.co/storage/v1/object/public/restore/preview-after.jpg" class="after" alt="After" id="afterImg">
-      <input type="range" min="0" max="100" value="50" class="slider-bar" id="slider">
+    <div class="slider-container">
+      <div class="slider-image-wrapper" id="sliderWrapper">
+        <img src="https://cacwogekvnrrmmnjtmql.supabase.co/storage/v1/object/public/restore/preview-before.jpg" class="before" />
+        <img src="https://cacwogekvnrrmmnjtmql.supabase.co/storage/v1/object/public/restore/preview-after.jpg" class="after" id="sliderImg" />
+        <div class="slider-handle" id="sliderHandle"></div>
+      </div>
     </div>
 
     <div class="actions">
@@ -183,11 +204,25 @@
   </div>
 
   <script>
-    const slider = document.getElementById('slider');
-    const afterImg = document.getElementById('afterImg');
+    const sliderWrapper = document.getElementById('sliderWrapper');
+    const sliderImg = document.getElementById('sliderImg');
+    const sliderHandle = document.getElementById('sliderHandle');
 
-    slider.addEventListener('input', (e) => {
-      afterImg.style.clipPath = `inset(0 ${100 - e.target.value}% 0 0)`;
+    sliderWrapper.addEventListener('mousemove', (e) => {
+      const bounds = sliderWrapper.getBoundingClientRect();
+      const x = e.clientX - bounds.left;
+      const percent = Math.max(0, Math.min(100, (x / bounds.width) * 100));
+      sliderImg.style.clipPath = `inset(0 ${100 - percent}% 0 0)`;
+      sliderHandle.style.left = `${percent}%`;
+    });
+
+    sliderWrapper.addEventListener('touchmove', (e) => {
+      const touch = e.touches[0];
+      const bounds = sliderWrapper.getBoundingClientRect();
+      const x = touch.clientX - bounds.left;
+      const percent = Math.max(0, Math.min(100, (x / bounds.width) * 100));
+      sliderImg.style.clipPath = `inset(0 ${100 - percent}% 0 0)`;
+      sliderHandle.style.left = `${percent}%`;
     });
 
     function openLogin() {
