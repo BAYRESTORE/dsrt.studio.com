@@ -92,7 +92,7 @@
     import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm'
 
     const supabaseUrl = 'https://cacwogekvnrrmmnjtmql.supabase.co'
-    const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNhY3dvZ2Vrdm5ycm1tbmp0bXFsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQwMjIzODUsImV4cCI6MjA2OTU5ODM4NX0.tgGrAt8ARa9KCsfx77OxFK3GOyaNozDX1qPs1uRnUbw
+    const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNhY3dvZ2Vrdm5ycm1tbmp0bXFsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQwMjIzODUsImV4cCI6MjA2OTU5ODM4NX0.tgGrAt8ARa9KCsfx77OxFK3GOyaNozDX1qPs1uRnUbw'
     const supabase = createClient(supabaseUrl, supabaseKey)
 
     const uploadInput = document.getElementById('uploadInput')
@@ -128,12 +128,12 @@
       resultArea.innerHTML = `<h3>Memproses...</h3>`
       await new Promise(resolve => setTimeout(resolve, 5000))
 
-      // Simulasi hasil restore (menggunakan hasil sama)
-      const restoredUrl = originalUrl // ganti jika punya model real
+      // Simulasi hasil restore (sementara = sama)
+      const restoredUrl = originalUrl
 
       let watermarked = `
         <div style="position:relative; display:inline-block;">
-          <img src="${restoredUrl}" class="${removeC'ount >= 3 ? 'locked' : ''}" />
+          <img src="${restoredUrl}" class="${removeCount >= 3 ? 'locked' : ''}" />
           ${removeCount >= 3 ? '' : '<div class="watermark">DSRT Studio</div>'}
         </div>
         <br>
