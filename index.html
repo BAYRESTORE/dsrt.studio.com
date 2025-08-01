@@ -3,112 +3,203 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Digital Smart Remaster Technology</title>
+  <title>DSRT Studio</title>
   <style>
     body {
       margin: 0;
       font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(to right, #f4f4f4, #eaeaea);
-      color: #222;
+      background: #0e0e0e;
+      color: #fff;
     }
+
     header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1.2rem 2rem;
-      background-color: white;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    }
-    .logo {
-      height: 50px;
-    }
-    .login-btn {
-      background: #222;
-      color: white;
-      border: none;
-      padding: 0.6rem 1rem;
-      border-radius: 8px;
-      cursor: pointer;
-      font-weight: 600;
-    }
-    main {
-      max-width: 1100px;
-      margin: 2rem auto;
-      padding: 0 1.5rem;
       text-align: center;
+      padding: 30px 20px 20px;
     }
+
+    header img {
+      width: 120px;
+      height: auto;
+    }
+
     h1 {
-      font-size: 2.4rem;
-      margin-bottom: 0.5rem;
+      font-size: 2.2rem;
+      margin: 10px 0 0;
+      color: #f0c040;
     }
-    h2 {
-      font-size: 1.3rem;
-      margin-bottom: 1.5rem;
-      color: #444;
-    }
+
     .slider-container {
-      margin-top: 3rem;
+      display: flex;
+      justify-content: center;
+      margin: 30px 0;
       position: relative;
-      max-width: 700px;
-      margin-left: auto;
-      margin-right: auto;
+      max-width: 600px;
+      margin-inline: auto;
     }
-    .slider-wrapper {
-      position: relative;
+
+    .slider-container img {
       width: 100%;
-      height: 400px;
-      overflow: hidden;
-      border-radius: 12px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
-    }
-    .slider-wrapper img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
+      border-radius: 10px;
       position: absolute;
-      top: 0;
-      left: 0;
-    }
-    .slider-wrapper .after {
-      clip-path: inset(0 50% 0 0);
       transition: clip-path 0.3s ease;
     }
-    input[type="range"] {
+
+    .slider-container input[type="range"] {
       width: 100%;
-      margin-top: 1rem;
+      margin-top: 240px;
+    }
+
+    .upload-section {
+      margin: 40px auto;
+      text-align: center;
+      max-width: 500px;
+      background: #1a1a1a;
+      padding: 30px;
+      border-radius: 14px;
+      border: 1px solid #444;
+    }
+
+    .upload-section input, .upload-section button {
+      padding: 12px;
+      font-size: 1rem;
+      border-radius: 8px;
+      border: none;
+      margin-top: 12px;
+      width: 100%;
+    }
+
+    .upload-section button {
+      background: #f0c040;
+      color: #000;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .menu-buttons {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+      margin-top: 20px;
+    }
+
+    .menu-buttons button {
+      background: #333;
+      color: white;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-size: 1rem;
+      cursor: pointer;
+      border: 1px solid #555;
+      width: 200px;
+    }
+
+    .menu-buttons button:hover {
+      background: #444;
+    }
+
+    footer {
+      margin-top: 60px;
+      padding: 20px;
+      background: #111;
+      text-align: center;
+      font-size: 0.9rem;
+      color: #ccc;
+    }
+
+    footer a {
+      color: #f0c040;
+      text-decoration: none;
+    }
+
+    .about {
+      text-align: center;
+      max-width: 600px;
+      margin: 60px auto 40px;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: #ccc;
     }
   </style>
 </head>
 <body>
 
   <header>
-    <img src="https://cacwogekvnrrmmnjtmql.supabase.co/storage/v1/object/public/restore//logo-dsrt.png" class="logo" alt="Logo DSRT" />
-    <button class="login-btn" onclick="location.href='register.html'">Masuk / Daftar</button>
+    <img src="https://cacwogekvnrrmmnjtmql.supabase.co/storage/v1/object/public/restore//logo-dsrt.png" alt="DSRT Logo">
+    <h1>DSRT Studio</h1>
+    <p>Digital Smart Remaster Technology</p>
   </header>
 
-  <main>
-    <h1>Digital Smart Remaster Technology</h1>
-    <h2>Uji teknologi restorasi kami secara langsung</h2>
+  <div class="slider-container">
+    <img id="after" src="https://cacwogekvnrrmmnjtmql.supabase.co/storage/v1/object/public/restore//preview-after.jpg" alt="Sesudah">
+    <img id="before" src="https://cacwogekvnrrmmnjtmql.supabase.co/storage/v1/object/public/restore//preview-before.jpg" alt="Sebelum">
+    <input type="range" id="slider" min="0" max="100" value="50" />
+  </div>
 
-    <div class="slider-container">
-      <div class="slider-wrapper" id="slider">
-        <img src="https://cacwogekvnrrmmnjtmql.supabase.co/storage/v1/object/public/restore//preview-before.jpg" alt="Before" />
-        <img src="https://cacwogekvnrrmmnjtmql.supabase.co/storage/v1/object/public/restore//preview-after.jpg" class="after" alt="After" id="afterImage" />
-      </div>
-      <input type="range" min="0" max="100" value="50" id="sliderRange" />
-    </div>
-  </main>
+  <div class="upload-section">
+    <h3>🔁 Unggah Gambar untuk Restore</h3>
+    <form id="upload-form">
+      <input type="file" id="fileInput" accept="image/*" required>
+      <button type="submit">Restore Sekarang</button>
+    </form>
+    <img id="preview" style="display:none; margin-top: 20px; max-width: 100%; border-radius: 10px;" />
+  </div>
 
-  <script>
+  <div class="menu-buttons">
+    <button onclick="location.href='https://dsrt-soft.vercel.app/manual'">🎛️ Manual + One Tap</button>
+    <button onclick="location.href='https://dsrt-soft.vercel.app/logo'">🖋️ Desain Logo</button>
+  </div>
+
+  <div class="about">
+    <h3>Tentang Kami</h3>
+    <p>DSRT (Digital Smart Remaster Technology) adalah platform revolusioner untuk restorasi dan perbaikan gambar dengan teknologi AI. Kami fokus pada pemulihan kualitas gambar lama, memperbaiki kerusakan, dan mengembalikan kejernihan seperti baru.</p>
+  </div>
+
+  <footer>
+    &copy; DSRT 2025 • <a href="https://wa.me/6287838441426">Hubungi Admin</a>
+  </footer>
+
+  <script type="module">
+    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm'
+
+    const supabaseUrl = 'https://cacwogekvnrrmmnjtmql.supabase.co'
+    const supabaseKey = 'SUPABASE_PUBLIC_KEY' // Ganti ini
+    const supabase = createClient(supabaseUrl, supabaseKey)
+
+    const form = document.getElementById('upload-form')
+    const preview = document.getElementById('preview')
+
+    form.onsubmit = async (e) => {
+      e.preventDefault()
+      const fileInput = document.getElementById('fileInput')
+      const file = fileInput.files[0]
+      if (!file) return alert("Pilih file dulu!")
+
+      const filePath = `${Date.now()}-${file.name}`
+
+      const { error } = await supabase.storage
+        .from('restore')
+        .upload(filePath, file, {
+          cacheControl: '3600',
+          upsert: false,
+        })
+
+      if (error) return alert("Gagal upload")
+
+      const { data: urlData } = supabase.storage
+        .from('restore')
+        .getPublicUrl(filePath)
+
+      preview.src = urlData.publicUrl
+      preview.style.display = "block"
+    }
+
     const slider = document.getElementById('slider');
-    const afterImage = document.getElementById('afterImage');
-    const sliderRange = document.getElementById('sliderRange');
-
-    sliderRange.addEventListener('input', (e) => {
-      const value = e.target.value;
-      afterImage.style.clipPath = `inset(0 ${100 - value}% 0 0)`;
+    const beforeImg = document.getElementById('before');
+    slider.addEventListener('input', () => {
+      beforeImg.style.clipPath = `inset(0 ${100 - slider.value}% 0 0)`;
     });
+    slider.dispatchEvent(new Event('input'));
   </script>
-
 </body>
 </html>
