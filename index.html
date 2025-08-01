@@ -7,72 +7,88 @@
   </div>
 
   <title>Daftar - DSRT</title>
-  <style>
-    body {
-      background: #0e0e0e;
-      color: #fff;
-      font-family: 'Segoe UI', sans-serif;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 40px 20px;
-    }
-    h1 {
-      color: #f0c040;
-      margin-bottom: 20px;
-    }
-    form {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-      width: 100%;
-      max-width: 400px;
-      margin-bottom: 30px;
-      padding: 20px;
-      background: #1a1a1a;
-      border-radius: 12px;
-      border: 1px solid #333;
-    }
-    input {
-      padding: 12px;
-      font-size: 1rem;
-      border-radius: 8px;
-      border: 1px solid #444;
-      background: #222;
-      color: #fff;
-    }
-    button.submit-btn {
-      padding: 14px;
-      font-size: 1rem;
-      background: #f0c040;
-      color: #000;
-      border: none;
-      border-radius: 8px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-    .features {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      width: 100%;
-      max-width: 400px;
-    }
-    .features button {
-      background: #333;
-      color: #fff;
-      border: 1px solid #555;
-      border-radius: 8px;
-      padding: 14px;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: background 0.2s;
-    }
-    .features button:hover {
-      background: #555;
-    }
-  </style>
-</head>
+<style>
+  body {
+    margin: 0;
+    padding: 40px 20px;
+    font-family: 'Segoe UI', sans-serif;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(270deg, #0e0e0e, #1c1c1c, #222222, #0e0e0e);
+    background-size: 600% 600%;
+    animation: bgShift 15s ease infinite;
+  }
+
+  @keyframes bgShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  h1 {
+    color: #f0c040;
+    margin-bottom: 20px;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+    max-width: 400px;
+    margin-bottom: 30px;
+    padding: 20px;
+    background: rgba(26, 26, 26, 0.9);
+    border-radius: 12px;
+    border: 1px solid #333;
+  }
+
+  input {
+    padding: 12px;
+    font-size: 1rem;
+    border-radius: 8px;
+    border: 1px solid #444;
+    background: #222;
+    color: #fff;
+  }
+
+  button.submit-btn {
+    padding: 14px;
+    font-size: 1rem;
+    background: #f0c040;
+    color: #000;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+  .features {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+    max-width: 400px;
+  }
+
+  .features button {
+    background: #333;
+    color: #fff;
+    border: 1px solid #555;
+    border-radius: 8px;
+    padding: 14px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .features button:hover {
+    background: #555;
+  }
+</style>
 <body>
 
   <h1>Daftar & Mulai</h1>
