@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html lang="id">
+<!DOCTYPE html><html lang="id">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -17,190 +16,175 @@
       flex-direction: column;
       align-items: center;
       min-height: 100vh;
-    }
+    }@keyframes bgShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
 
-    @keyframes bgShift {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
+header {
+  text-align: center;
+  margin-bottom: 20px;
+}
 
-    header {
-      text-align: center;
-      margin-bottom: 20px;
-    }
+header h1 {
+  font-size: 2.8rem;
+  margin: 0;
+  color: #f0c040;
+}
 
-    header h1 {
-      font-size: 2.8rem;
-      margin: 0;
-      color: #f0c040;
-    }
+header p {
+  margin: 4px 0 0;
+  font-size: 1rem;
+  color: #aaa;
+}
 
-    header p {
-      margin: 4px 0 0;
-      font-size: 1rem;
-      color: #aaa;
-    }
+.account-info {
+  margin-top: 10px;
+  text-align: center;
+  font-size: 0.95rem;
+  color: #ccc;
+}
 
-    .account-info {
-      margin-top: 10px;
-      text-align: center;
-      font-size: 0.95rem;
-      color: #ccc;
-    }
+.limit-warning {
+  margin: 20px 0 30px;
+  padding: 12px;
+  background: #222;
+  border-left: 4px solid #f0c040;
+  color: #fff;
+  max-width: 400px;
+  font-size: 0.9rem;
+}
 
-    .limit-warning {
-      margin: 20px 0 30px;
-      padding: 12px;
-      background: #222;
-      border-left: 4px solid #f0c040;
-      color: #fff;
-      max-width: 400px;
-      font-size: 0.9rem;
-    }
+.upload-section {
+  background: rgba(0,0,0,0.3);
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid #444;
+  max-width: 420px;
+  width: 100%;
+  margin-bottom: 30px;
+  text-align: center;
+}
 
-    .upload-section {
-      background: rgba(0,0,0,0.3);
-      padding: 20px;
-      border-radius: 12px;
-      border: 1px solid #444;
-      max-width: 420px;
-      width: 100%;
-      margin-bottom: 30px;
-      text-align: center;
-    }
+.upload-section input[type="file"], 
+.upload-section button {
+  margin-top: 15px;
+  padding: 12px;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: none;
+}
 
-    .upload-section input[type="file"], 
-    .upload-section button {
-      margin-top: 15px;
-      padding: 12px;
-      font-size: 1rem;
-      border-radius: 8px;
-      border: none;
-    }
+.upload-section button {
+  background: #f0c040;
+  color: #000;
+  font-weight: bold;
+  cursor: pointer;
+}
 
-    .upload-section button {
-      background: #f0c040;
-      color: #000;
-      font-weight: bold;
-      cursor: pointer;
-    }
+.menu {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+  max-width: 400px;
+}
 
-    .menu {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-      width: 100%;
-      max-width: 400px;
-    }
+.menu button {
+  padding: 16px;
+  font-size: 1.1rem;
+  background: #333;
+  color: #fff;
+  border: 1px solid #555;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
 
-    .menu button {
-      padding: 16px;
-      font-size: 1.1rem;
-      background: #333;
-      color: #fff;
-      border: 1px solid #555;
-      border-radius: 10px;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
+.menu button:hover {
+  background: #555;
+}
 
-    .menu button:hover {
-      background: #555;
-    }
+.menu button.locked {
+  opacity: 0.6;
+  cursor: not-allowed;
+  position: relative;
+}
 
-    .menu button.locked {
-      opacity: 0.6;
-      cursor: not-allowed;
-      position: relative;
-    }
+.menu button.locked::after {
+  content: "🔒 Premium";
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.9rem;
+  color: #f0c040;
+}
 
-    .menu button.locked::after {
-      content: "🔒 Premium";
-      position: absolute;
-      right: 14px;
-      top: 50%;
-      transform: translateY(-50%);
-      font-size: 0.9rem;
-      color: #f0c040;
-    }
+.logout {
+  margin-top: 30px;
+  background: #f44336;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+}
 
-    .logout {
-      margin-top: 30px;
-      background: #f44336;
-      color: white;
-      padding: 12px 20px;
-      border: none;
-      border-radius: 8px;
-      font-weight: bold;
-      cursor: pointer;
-    }
+#preview {
+  margin-top: 20px;
+  max-width: 100%;
+  border-radius: 10px;
+  display: none;
+  box-shadow: 0 0 10px #000;
+}
 
-    #preview {
-      margin-top: 20px;
-      max-width: 100%;
-      border-radius: 10px;
-      display: none;
-      box-shadow: 0 0 10px #000;
-    }
+footer {
+  margin-top: auto;
+  text-align: center;
+  padding: 20px 0;
+  color: #aaa;
+  font-size: 0.9rem;
+}
 
-    footer {
-      margin-top: auto;
-      text-align: center;
-      padding: 20px 0;
-      color: #aaa;
-      font-size: 0.9rem;
-    }
+footer a {
+  color: #f0c040;
+  text-decoration: none;
+}
 
-    footer a {
-      color: #f0c040;
-      text-decoration: none;
-    }
   </style>
 </head>
-<body>
-
-  <header>
+<body>  <header>
     <h1>DSRT</h1>
     <p>Digital Smart Remaster Technology</p>
     <hr style="width: 60%; margin: 20px auto; border: 0; border-top: 1px solid #444;">
-  </header>
-
-  <div class="account-info">
+  </header>  <div class="account-info">
     Selamat datang, <strong>Nama Pengguna</strong><br>
     Email: <em>pengguna@email.com</em>
-  </div>
-
-  <div class="limit-warning">
+  </div>  <div class="limit-warning">
     🔁 Anda memiliki <strong>2x kesempatan restore gratis</strong>. Setelah itu, upgrade untuk akses penuh tanpa batas.
-  </div>
-
-  <div class="upload-section">
+  </div>  <div class="upload-section">
     <h3>🔁 Unggah Gambar untuk Restore</h3>
     <form id="upload-form">
       <input type="file" id="fileInput" accept="image/*" required><br>
       <button type="submit">Restore Sekarang</button>
     </form>
     <img id="preview" alt="Hasil Restore" />
-  </div>
-
-  <div class="menu">
+  </div>  <div class="menu">
     <button onclick="location.href='https://dsrt-soft.vercel.app/manual'">🎛️ Manual Editor</button>
     <button onclick="location.href='https://dsrt-soft.vercel.app/logo'">🖋️ Desain Logo</button>
     <button class="locked">✨ AI Detail+ Skin Retouch</button>
     <button class="locked">🧠 AI Extend + Rekonstruksi</button>
-  </div>
-
-  <button class="logout" onclick="location.href='index.html'">🚪 Logout</button>
+  </div><button class="logout" onclick="location.href='index.html'">🚪 Logout</button>
 
   <footer>
     © DSRT 2025 &nbsp;•&nbsp;
     <a href="https://wa.me/6287838441426">WhatsApp Admin</a>
     &nbsp;•&nbsp;
     <a href="#">Tentang Kami</a>
-  </footer>
-
-  <script type="module">
+  </footer>  <script type="module">
     import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm'
 
     const supabase = createClient(
@@ -228,7 +212,5 @@
       preview.src = urlData.publicUrl;
       preview.style.display = 'block';
     };
-  </script>
-
-</body>
+  </script></body>
 </html>
