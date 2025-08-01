@@ -1,3 +1,92 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Daftar - DSRT</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 40px 20px;
+      font-family: 'Segoe UI', sans-serif;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      background: linear-gradient(270deg, #0e0e0e, #1c1c1c, #222222, #0e0e0e);
+      background-size: 600% 600%;
+      animation: bgShift 15s ease infinite;
+    }
+
+    @keyframes bgShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    h1 {
+      color: #f0c040;
+      margin-bottom: 20px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      width: 100%;
+      max-width: 400px;
+      margin-bottom: 30px;
+      padding: 20px;
+      background: rgba(26, 26, 26, 0.9);
+      border-radius: 12px;
+      border: 1px solid #333;
+    }
+
+    input {
+      padding: 12px;
+      font-size: 1rem;
+      border-radius: 8px;
+      border: 1px solid #444;
+      background: #222;
+      color: #fff;
+    }
+
+    button.submit-btn {
+      padding: 14px;
+      font-size: 1rem;
+      background: #f0c040;
+      color: #000;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .features {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      width: 100%;
+      max-width: 400px;
+    }
+
+    .features button {
+      background: #333;
+      color: #fff;
+      border: 1px solid #555;
+      border-radius: 8px;
+      padding: 14px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .features button:hover {
+      background: #555;
+    }
+  </style>
+</head>
 <body>
 
   <div style="width: 100%; text-align: center; margin-bottom: 20px;">
@@ -5,91 +94,6 @@
     <div style="font-size: 1rem; color: #aaa;">Digital Smart Remaster Technology</div>
     <hr style="width: 60%; margin: 20px auto; border: 0; border-top: 1px solid #444;">
   </div>
-
-  <title>Daftar - DSRT</title>
-<style>
-  body {
-    margin: 0;
-    padding: 40px 20px;
-    font-family: 'Segoe UI', sans-serif;
-    color: #fff;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    min-height: 100vh;
-    background: linear-gradient(270deg, #0e0e0e, #1c1c1c, #222222, #0e0e0e);
-    background-size: 600% 600%;
-    animation: bgShift 15s ease infinite;
-  }
-
-  @keyframes bgShift {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-  }
-
-  h1 {
-    color: #f0c040;
-    margin-bottom: 20px;
-  }
-
-  form {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    width: 100%;
-    max-width: 400px;
-    margin-bottom: 30px;
-    padding: 20px;
-    background: rgba(26, 26, 26, 0.9);
-    border-radius: 12px;
-    border: 1px solid #333;
-  }
-
-  input {
-    padding: 12px;
-    font-size: 1rem;
-    border-radius: 8px;
-    border: 1px solid #444;
-    background: #222;
-    color: #fff;
-  }
-
-  button.submit-btn {
-    padding: 14px;
-    font-size: 1rem;
-    background: #f0c040;
-    color: #000;
-    border: none;
-    border-radius: 8px;
-    font-weight: bold;
-    cursor: pointer;
-  }
-
-  .features {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    width: 100%;
-    max-width: 400px;
-  }
-
-  .features button {
-    background: #333;
-    color: #fff;
-    border: 1px solid #555;
-    border-radius: 8px;
-    padding: 14px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background 0.2s;
-  }
-
-  .features button:hover {
-    background: #555;
-  }
-</style>
-<body>
 
   <h1>Daftar & Mulai</h1>
 
@@ -106,6 +110,15 @@
     <button onclick="location.href='https://dsrt-soft.vercel.app/logo'">🖋️ Buka Desain Logo</button>
   </div>
 
+  <footer style="margin-top: 60px; text-align: center; font-size: 0.9rem; color: #aaa;">
+    <div style="border-top: 1px solid #333; padding-top: 16px;">
+      © DSRT 2025 &nbsp;•&nbsp;
+      <a href="https://wa.me/6287838441426" style="color: #f0c040; text-decoration: none;">WhatsApp Admin</a>
+      &nbsp;•&nbsp;
+      <a href="#" style="color: #f0c040; text-decoration: none;">Tentang Kami</a>
+    </div>
+  </footer>
+
   <script>
     document.getElementById('register-form').addEventListener('submit', function(e) {
       e.preventDefault();
@@ -115,13 +128,3 @@
 
 </body>
 </html>
-
-
-  <footer style="margin-top: 60px; text-align: center; font-size: 0.9rem; color: #aaa;">
-    <div style="border-top: 1px solid #333; padding-top: 16px;">
-      © DSRT 2025 &nbsp;•&nbsp;
-      <a href="https://wa.me/6287838441426" style="color: #f0c040; text-decoration: none;">WhatsApp Admin</a>
-      &nbsp;•&nbsp;
-      <a href="#" style="color: #f0c040; text-decoration: none;">Tentang Kami</a>
-    </div>
-  </footer>
