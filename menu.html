@@ -1,4 +1,4 @@
-
+<!DOCTYPE html>
 <html lang="id">
 <head>
   <meta charset="UTF-8" />
@@ -200,32 +200,33 @@
     <a href="#">Tentang Kami</a>
   </footer>
 
-  <script>
+  <script type="module">
+    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm'
+
+    const supabase = createClient(
+      'https://cacwogekvnrrmmnjtmql.supabase.co',
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNhY3dvZ2Vrdm5ycm1tbmp0bXFsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQwMjIzODUsImV4cCI6MjA2OTU5ODM4NX0.tgGrAt8ARa9KCsfx77OxFK3GOyaNozDX1qPs1uRnUbw'
+    )
+
     const form = document.getElementById('upload-form');
     const preview = document.getElementById('preview');
 
     form.onsubmit = async (e) => {
       e.preventDefault();
-      const fileInput = document.getElementById('fileInput');
-      const formData = new FormData();
-      formData.append("file", fileInput.files[0]);
+      const file = document.getElementById('fileInput').files[0];
+      if (!file) return;
 
-      preview.style.display = "none";
-      preview.src = "";
+      const fileName = `${Date.now()}-${file.name}`;
+      const { data, error } = await supabase.storage.from('restore').upload(fileName, file);
 
-      const response = await fetch("https://api.dsrtstudio.com/restore", {
-        method: "POST",
-        body: formData
-      });
-
-      if (response.ok) {
-        const blob = await response.blob();
-        const url = URL.createObjectURL(blob);
-        preview.src = url;
-        preview.style.display = "block";
-      } else {
-        alert("Restore gagal. Silakan coba lagi.");
+      if (error) {
+        alert("Upload gagal.");
+        return;
       }
+
+      const { data: urlData } = supabase.storage.from('restore').getPublicUrl(fileName);
+      preview.src = urlData.publicUrl;
+      preview.style.display = 'block';
     };
   </script>
 
