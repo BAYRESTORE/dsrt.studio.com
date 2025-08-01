@@ -1,204 +1,110 @@
-<!DOCTYPE html>
-<html lang="id">
+<!DOCTYPE html><html lang="id">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Daftar - DSRT</title>
+  <title>DSRT Studio – Restore Foto Rusak dengan AI</title>
   <style>
     body {
       margin: 0;
-      padding: 40px 20px;
       font-family: 'Segoe UI', sans-serif;
-      color: #fff;
-      min-height: 100vh;
-      background: linear-gradient(-45deg, #0f2027, #203a43, #2c5364, #0f2027);
-      background-size: 400% 400%;
-      animation: bgShift 20s ease infinite;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
+      background: #0e0e0e;
+      color: white;
+    }
+    header {
+      background: black;
+      padding: 20px;
       text-align: center;
     }
-
-    @keyframes bgShift {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
+    header img {
+      height: 60px;
     }
-
+    main {
+      padding: 30px 20px;
+      max-width: 1000px;
+      margin: auto;
+    }
     h1 {
-      color: #f0c040;
-      margin: 20px 0 10px;
-    }
-
-    .logo-container {
-      margin-top: 20px;
-    }
-
-    .logo-container div:first-child {
-      font-size: 2.8rem;
-      font-weight: bold;
-      color: #f0c040;
-    }
-
-    .logo-container div:last-child {
-      font-size: 1rem;
-      color: #aaa;
+      text-align: center;
+      font-size: 36px;
       margin-bottom: 10px;
     }
-
-    hr {
-      width: 60%;
-      margin: 10px auto 30px;
-      border: 0;
-      border-top: 1px solid #444;
+    p {
+      text-align: center;
+      font-size: 18px;
+      color: #ccc;
     }
-
-    form {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-      width: 100%;
-      max-width: 400px;
-      margin-bottom: 30px;
-      padding: 20px;
-      background: rgba(26, 26, 26, 0.9);
-      border-radius: 12px;
-      border: 1px solid #333;
+    .cta {
+      text-align: center;
+      margin: 40px 0;
     }
-
-    input {
-      padding: 12px;
-      font-size: 1rem;
-      border-radius: 8px;
-      border: 1px solid #444;
-      background: #222;
-      color: #fff;
-    }
-
-    button.submit-btn {
-      padding: 14px;
-      font-size: 1rem;
-      background: #f0c040;
-      color: #000;
-      border: none;
-      border-radius: 8px;
+    .cta a {
+      background: #ffcc00;
+      color: black;
+      padding: 14px 28px;
       font-weight: bold;
-      cursor: pointer;
-    }
-
-    .features {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      width: 100%;
-      max-width: 400px;
-    }
-
-    .features button {
-      background: #333;
-      color: #fff;
-      border: 1px solid #555;
+      text-decoration: none;
       border-radius: 8px;
-      padding: 14px;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: background 0.2s;
+      transition: 0.3s;
     }
-
-    .features button:hover {
-      background: #555;
+    .cta a:hover {
+      background: #e6b800;
     }
-
-    .theme-button {
-      margin: 30px 0 10px;
-      background: #f0c040;
-      color: #000;
-      padding: 12px 20px;
-      border: none;
-      border-radius: 8px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    .theme-button:hover {
-      background: #ffd966;
-    }
-
     footer {
       margin-top: 60px;
       text-align: center;
-      font-size: 0.9rem;
-      color: #aaa;
+      font-size: 14px;
+      color: #777;
     }
-
-    footer div {
-      border-top: 1px solid #333;
-      padding-top: 16px;
-    }
-
-    footer a {
-      color: #f0c040;
-      text-decoration: none;
-    }
-
   </style>
 </head>
 <body>
+  <header>
+    <img src="logo-dsrt.png" alt="DSRT Logo" />
+  </header>
+  <main>
+    <h1>Selamat Datang di DSRT Studio</h1>
+    <p>Platform canggih untuk merestore foto lama atau rusak menggunakan teknologi AI.</p><div class="cta">
+  <a href="https://dsrt-soft.vercel.app" target="_blank">Unggah &amp; Mulai Restore</a>
+</div>
 
-  <div class="logo-container">
-    <div>DSRT</div>
-    <div>Digital Smart Remaster Technology</div>
-    <hr />
-  </div>
+<!-- ========== BAGIAN PREVIEW & GALERI RESTORE ========== -->
+<section id="preview" style="padding: 60px 15px; background: #111; color: white;">
+  <h2 style="text-align: center; font-size: 28px; margin-bottom: 20px;">Preview Sebelum &amp; Sesudah</h2>
 
-  <h1>Daftar & Mulai</h1>
-
-<form id="register-form">
-  <input type="text" placeholder="Nama Lengkap" required>
-  <input type="email" placeholder="Email" required>
-  <input type="password" placeholder="Password" required>
-  <button type="submit" class="submit-btn">Daftar dan Mulai</button>
-</form>
-  <div class="features">
-    <button onclick="location.href='https://dsrt-soft.vercel.app/restore'">🔁 Unggah Gambar (Restore)</button>
-    <button onclick="location.href='https://dsrt-soft.vercel.app/manual'">🎛️ Buka Semua Manual</button>
-    <button onclick="location.href='https://dsrt-soft.vercel.app/logo'">🖋️ Buka Desain Logo</button>
-  </div>
-
-  <button class="theme-button" onclick="changeTheme()">🎨 Ganti Warna Tema</button>
-
-  <footer>
-    <div>
-      © DSRT 2025 &nbsp;•&nbsp;
-      <a href="https://wa.me/6287838441426">WhatsApp Admin</a>
-      &nbsp;•&nbsp;
-      <a href="#">Tentang Kami</a>
+  <!-- Slider Before/After -->
+  <div style="position: relative; width: 100%; max-width: 600px; margin: auto; overflow: hidden; border-radius: 12px; box-shadow: 0 0 15px rgba(255,255,255,0.1);">
+    <div id="imgContainer" style="display: flex; width: 200%; transition: transform 0.5s ease;">
+      <img src="before.jpg" alt="Sebelum Restore" style="width: 50%; object-fit: cover;" />
+      <img src="after.jpg" alt="Sesudah Restore" style="width: 50%; object-fit: cover;" />
     </div>
-  </footer>
+  </div>
 
-  <script>
-    document.getElementById('register-form').addEventListener('submit', function(e) {
-      e.preventDefault();
-      window.location.href = "https://dsrt-soft.vercel.app";
-    });
+  <div style="display: flex; justify-content: center; gap: 20px; margin-top: 20px;">
+    <button onclick="showBefore()" style="background: #ffcc00; border: none; padding: 10px 20px; border-radius: 6px; font-weight: bold; cursor: pointer;">Sebelum</button>
+    <button onclick="showAfter()" style="background: #ffcc00; border: none; padding: 10px 20px; border-radius: 6px; font-weight: bold; cursor: pointer;">Sesudah</button>
+  </div>
 
-    const themes = [
-      'linear-gradient(-45deg, #0f2027, #203a43, #2c5364, #0f2027)',
-      'linear-gradient(-45deg, #1a1a1a, #2e2e2e, #444, #1a1a1a)',
-      'linear-gradient(-45deg, #3a1c71, #d76d77, #ffaf7b)',
-      'linear-gradient(-45deg, #1f4037, #99f2c8)',
-    ];
-    let currentTheme = 0;
+  <!-- Galeri Horizontal -->
+  <div style="margin-top: 50px; max-width: 1000px; margin-inline: auto;">
+    <h3 style="font-size: 22px; margin-bottom: 12px;">Galeri Hasil Restore Lainnya</h3>
+    <div style="display: flex; gap: 15px; overflow-x: auto; padding-bottom: 10px;">
+      <img src="galeri1.jpg" alt="Galeri 1" style="height: 140px; border-radius: 10px; box-shadow: 0 0 8px rgba(255,255,255,0.08);" />
+      <img src="galeri2.jpg" alt="Galeri 2" style="height: 140px; border-radius: 10px; box-shadow: 0 0 8px rgba(255,255,255,0.08);" />
+      <img src="galeri3.jpg" alt="Galeri 3" style="height: 140px; border-radius: 10px; box-shadow: 0 0 8px rgba(255,255,255,0.08);" />
+      <img src="galeri4.jpg" alt="Galeri 4" style="height: 140px; border-radius: 10px; box-shadow: 0 0 8px rgba(255,255,255,0.08);" />
+    </div>
+  </div>
+</section>
 
-    function changeTheme() {
-      currentTheme = (currentTheme + 1) % themes.length;
-      document.body.style.background = themes[currentTheme];
-      document.body.style.backgroundSize = '400% 400%';
-      document.body.style.animation = 'bgShift 20s ease infinite';
+  </main>  <footer>
+    &copy; 2025 DSRT Studio. All rights reserved.
+  </footer>  <script>
+    const imgContainer = document.getElementById("imgContainer");
+    function showBefore() {
+      imgContainer.style.transform = "translateX(0%)";
     }
-  </script>
-
-</body>
+    function showAfter() {
+      imgContainer.style.transform = "translateX(-50%)";
+    }
+  </script></body>
 </html>
