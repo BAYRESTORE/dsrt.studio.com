@@ -8,18 +8,17 @@
     body {
       margin: 0;
       font-family: 'Segoe UI', sans-serif;
-      background: #0e0e0e;
+      background: #0f0f0f;
       color: #fff;
       text-align: center;
     }
 
     header {
-      padding: 20px;
+      padding: 30px 20px 10px;
     }
 
     header img {
       height: 80px;
-      margin-bottom: 10px;
     }
 
     h1 {
@@ -31,60 +30,60 @@
       position: relative;
       max-width: 800px;
       margin: 40px auto;
-    }
-
-    .slider-container img {
-      width: 100%;
-      display: block;
+      overflow: hidden;
       border-radius: 12px;
+      box-shadow: 0 0 20px #000;
     }
 
-    .slider-wrapper {
-      position: relative;
-    }
-
-    .slider-wrapper input[type="range"] {
+    .slider-img {
       position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
       width: 100%;
-      top: 50%;
-      transform: translateY(-50%);
-      z-index: 10;
+      object-fit: cover;
+    }
+
+    .slider-overlay {
+      width: 50%;
+      overflow: hidden;
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      z-index: 2;
+    }
+
+    .slider-overlay img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .slider-bar {
       -webkit-appearance: none;
       appearance: none;
+      position: relative;
+      width: 100%;
       height: 0;
-      background: none;
+      margin-top: -15px;
+      z-index: 5;
       pointer-events: none;
     }
 
-    .slider-wrapper input[type="range"]::-webkit-slider-thumb {
+    .slider-bar::-webkit-slider-thumb {
       -webkit-appearance: none;
       appearance: none;
       width: 4px;
-      height: 100%;
+      height: 100vh;
       background: #f0c040;
       pointer-events: all;
       cursor: ew-resize;
     }
 
-    .before-img {
-      position: absolute;
-      top: 0;
-      left: 0;
-      overflow: hidden;
-      width: 50%;
-      height: 100%;
-      z-index: 5;
-    }
-
-    .before-img img {
-      width: 100%;
-      height: auto;
-    }
-
     .features {
-      padding: 30px 20px;
+      padding: 40px 20px;
       background: #1a1a1a;
-      margin-top: 40px;
     }
 
     .features h2 {
@@ -106,23 +105,29 @@
     }
 
     .cta {
-      margin: 30px;
+      margin: 40px 0;
     }
 
     .cta a {
       background: #f0c040;
       color: #000;
-      padding: 12px 24px;
+      padding: 14px 28px;
       text-decoration: none;
       font-weight: bold;
       border-radius: 8px;
     }
 
     footer {
-      margin-top: 60px;
+      margin-top: 40px;
       padding: 20px;
       font-size: 0.9rem;
       color: #888;
+    }
+
+    @media (max-width: 768px) {
+      header img {
+        height: 60px;
+      }
     }
   </style>
 </head>
@@ -133,40 +138,38 @@
     <h1>Digital Smart Remaster Technology</h1>
   </header>
 
-  <section class="slider-container">
-    <div class="slider-wrapper" id="slider">
-      <img src="https://cacwogekvnrrmmnjtmql.supabase.co/storage/v1/object/public/restore/preview-after.jpg" alt="Hasil Setelah" />
-      <div class="before-img" id="beforeImage">
-        <img src="https://cacwogekvnrrmmnjtmql.supabase.co/storage/v1/object/public/restore/preview-before.jpg" alt="Sebelum Restore" />
-      </div>
-      <input type="range" min="0" max="100" value="50" id="sliderRange" />
+  <div class="slider-container" style="height: 500px;">
+    <img src="https://cacwogekvnrrmmnjtmql.supabase.co/storage/v1/object/public/restore/preview-after.jpg" class="slider-img" alt="Hasil Sesudah">
+    <div class="slider-overlay" id="overlay">
+      <img src="https://cacwogekvnrrmmnjtmql.supabase.co/storage/v1/object/public/restore/preview-before.jpg" alt="Hasil Sebelum">
     </div>
-  </section>
+    <input type="range" min="0" max="100" value="50" class="slider-bar" id="sliderControl">
+  </div>
 
   <section class="features">
-    <h2>Fitur DSRT</h2>
+    <h2>Fitur Unggulan DSRT</h2>
     <ul>
-      <li>🔁 Restore foto lama, rusak, buram, atau hitam putih</li>
-      <li>✨ Perbaikan otomatis dan manual untuk detail wajah & pakaian</li>
-      <li>🎨 Desain ulang logo, border, latar belakang</li>
-      <li>🔒 Fitur keamanan watermark & batasan restore</li>
+      <li>📷 Restore foto lama dan rusak ke kualitas tinggi</li>
+      <li>🧠 AI untuk wajah, kulit, pakaian, dan latar</li>
+      <li>🖋️ Desain ulang logo, borders, dan sentuhan estetika</li>
+      <li>🔒 Sistem keamanan watermark dan batas gratis</li>
     </ul>
   </section>
 
   <div class="cta">
-    <a href="register.html">🔓 Mulai Sekarang – Gratis 3x Restore</a>
+    <a href="register.html">🔓 Coba Gratis 3x Restore</a>
   </div>
 
   <footer>
-    © 2025 DSRT • <a href="https://wa.me/6287838441426">Hubungi Admin</a>
+    © 2025 DSRT • <a href="https://wa.me/6287838441426" style="color:#f0c040;">WhatsApp Admin</a>
   </footer>
 
   <script>
-    const slider = document.getElementById('sliderRange');
-    const beforeImage = document.getElementById('beforeImage');
+    const slider = document.getElementById('sliderControl');
+    const overlay = document.getElementById('overlay');
 
     slider.addEventListener('input', () => {
-      beforeImage.style.width = slider.value + '%';
+      overlay.style.width = slider.value + '%';
     });
   </script>
 
