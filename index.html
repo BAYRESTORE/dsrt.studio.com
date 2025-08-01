@@ -30,6 +30,17 @@
       margin-bottom: 20px;
     }
 
+    .header-title {
+      font-size: 2.8rem;
+      font-weight: bold;
+      color: #f0c040;
+    }
+
+    .sub-title {
+      font-size: 1rem;
+      color: #aaa;
+    }
+
     form {
       display: flex;
       flex-direction: column;
@@ -104,14 +115,17 @@
 </head>
 <body>
 
+  <!-- Header -->
   <div style="width: 100%; text-align: center; margin-bottom: 20px;">
-    <div style="font-size: 2.8rem; font-weight: bold; color: #f0c040;">DSRT</div>
-    <div style="font-size: 1rem; color: #aaa;">Digital Smart Remaster Technology</div>
+    <div class="header-title">DSRT</div>
+    <div class="sub-title">Digital Smart Remaster Technology</div>
     <hr style="width: 60%; margin: 20px auto; border: 0; border-top: 1px solid #444;">
   </div>
 
+  <!-- Judul -->
   <h1>Daftar & Mulai</h1>
 
+  <!-- Form Pendaftaran -->
   <form id="register-form">
     <input type="text" placeholder="Nama Lengkap" required>
     <input type="email" placeholder="Email" required>
@@ -119,14 +133,17 @@
     <button type="submit" class="submit-btn">Daftar dan Mulai</button>
   </form>
 
+  <!-- Tombol Akses Fitur -->
   <div class="features">
     <button onclick="location.href='https://dsrt-soft.vercel.app/restore'">🔁 Unggah Gambar (Restore)</button>
     <button onclick="location.href='https://dsrt-soft.vercel.app/manual'">🎛️ Buka Semua Manual</button>
     <button onclick="location.href='https://dsrt-soft.vercel.app/logo'">🖋️ Buka Desain Logo</button>
   </div>
 
+  <!-- Tombol Ganti Warna Tema -->
   <button class="theme-button" onclick="changeTheme()">🎨 Ganti Warna Tema</button>
 
+  <!-- Footer -->
   <footer style="margin-top: 60px; text-align: center; font-size: 0.9rem; color: #aaa;">
     <div style="border-top: 1px solid #333; padding-top: 16px;">
       © DSRT 2025 &nbsp;•&nbsp;
@@ -137,13 +154,13 @@
   </footer>
 
   <script>
-    // Redirect setelah daftar
+    // Redirect ke Vercel setelah daftar
     document.getElementById('register-form').addEventListener('submit', function(e) {
       e.preventDefault();
       window.location.href = "https://dsrt-soft.vercel.app";
     });
 
-    // Tombol ubah warna tema
+    // Ganti tema warna latar belakang
     const themes = [
       'linear-gradient(-45deg, #0f2027, #203a43, #2c5364, #0f2027)',
       'linear-gradient(-45deg, #1a1a1a, #2e2e2e, #444, #1a1a1a)',
