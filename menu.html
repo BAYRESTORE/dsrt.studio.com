@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Menu Utama - DSRT</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 40px 20px;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(-45deg, #0f2027, #203a43, #2c5364, #0f2027);
+      background-size: 400% 400%;
+      animation: bgShift 15s ease infinite;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    @keyframes bgShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      margin: 0;
+      color: #f0c040;
+    }
+
+    header p {
+      margin: 0;
+      font-size: 1rem;
+      color: #aaa;
+    }
+
+    .menu {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      width: 100%;
+      max-width: 400px;
+    }
+
+    .menu button {
+      padding: 16px;
+      font-size: 1.1rem;
+      background: #333;
+      color: #fff;
+      border: 1px solid #555;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .menu button:hover {
+      background: #555;
+    }
+
+    footer {
+      margin-top: auto;
+      text-align: center;
+      padding: 20px 0;
+      color: #aaa;
+      font-size: 0.9rem;
+    }
+
+    footer a {
+      color: #f0c040;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>DSRT</h1>
+    <p>Digital Smart Remaster Technology</p>
+  </header>
+
+  <div class="menu">
+    <button onclick="location.href='https://dsrt-soft.vercel.app/restore'">🔁 Restore Foto</button>
+    <button onclick="location.href='https://dsrt-soft.vercel.app/manual'">🎛️ Manual Editor</button>
+    <button onclick="location.href='https://dsrt-soft.vercel.app/logo'">🖋️ Desain Logo</button>
+  </div>
+
+  <footer>
+    © DSRT 2025 &nbsp;•&nbsp;
+    <a href="https://wa.me/6287838441426">WhatsApp Admin</a>
+    &nbsp;•&nbsp;
+    <a href="#">Tentang Kami</a>
+  </footer>
+
+</body>
+</html>
