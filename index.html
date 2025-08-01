@@ -3,89 +3,109 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>DSRT – Digital Smart Remaster Technology</title>
+  <title>DSRT Studio – Restore & Desain Digital</title>
   <style>
     body {
       margin: 0;
       font-family: 'Segoe UI', sans-serif;
       background: #0e0e0e;
       color: #ffffff;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
     }
     header {
-      width: 100%;
-      padding: 20px;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      padding: 20px 40px;
       background: #1a1a1a;
       border-bottom: 1px solid #333;
     }
-    .logo-title {
-      display: flex;
-      flex-direction: column;
-    }
-    .logo-title h1 {
-      margin: 0;
-      font-size: 1.2rem;
+    .logo {
+      font-size: 1.5rem;
       font-weight: bold;
       color: #f0c040;
     }
-    .logo-title span {
-      font-size: 0.85rem;
-      color: #aaa;
+    .login-btn {
+      background: #f0c040;
+      color: #000;
+      padding: 10px 20px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
     }
     .hero {
       text-align: center;
-      margin: 40px 20px 20px;
-      font-size: 1.1rem;
-      color: #ddd;
+      padding: 60px 20px 30px;
+    }
+    .hero h1 {
+      font-size: 2rem;
+      color: #fff;
+    }
+    .hero p {
+      color: #ccc;
+      margin-top: 10px;
     }
     .cta {
-      background: #222;
-      padding: 20px;
       text-align: center;
-      font-size: 1.1rem;
-      font-weight: bold;
-      color: #f0c040;
-      margin: 20px 0;
-      border-top: 1px solid #333;
-      border-bottom: 1px solid #333;
+      margin: 30px 0;
     }
-    .upload-btn {
+    .cta a {
       background: #f0c040;
       color: #000;
-      padding: 12px 24px;
-      font-size: 16px;
+      padding: 14px 30px;
+      font-size: 1rem;
       font-weight: bold;
-      border-radius: 8px;
+      border-radius: 10px;
       text-decoration: none;
-      margin-top: 20px;
-      display: inline-block;
-      transition: background 0.2s;
     }
-    .upload-btn:hover {
-      background-color: #ffd966;
+    .gallery {
+      overflow-x: auto;
+      display: flex;
+      gap: 16px;
+      padding: 20px;
+      scroll-behavior: smooth;
+    }
+    .gallery img {
+      height: 200px;
+      border-radius: 12px;
     }
     .section-title {
-      margin: 40px 0 10px;
-      font-size: 1.2rem;
       text-align: center;
+      margin: 40px 0 10px;
+      font-size: 1.4rem;
       color: #f0c040;
     }
-    .footer {
-      margin-top: 40px;
+    .features {
+      max-width: 900px;
+      margin: auto;
+      padding: 20px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+    .feature-box {
+      background: #1a1a1a;
+      padding: 20px;
+      border-radius: 12px;
+      border: 1px solid #333;
+    }
+    .feature-box h3 {
+      margin: 0 0 10px;
+      color: #f0c040;
+    }
+    .feature-box p {
+      color: #ccc;
+      font-size: 0.95rem;
+    }
+    footer {
+      text-align: center;
       padding: 20px;
       font-size: 0.9rem;
       color: #aaa;
-      border-top: 1px solid #333;
-      text-align: center;
-      width: 100%;
       background: #1a1a1a;
+      border-top: 1px solid #333;
+      margin-top: 40px;
     }
-    .footer a {
+    footer a {
       color: #f0c040;
       text-decoration: none;
       margin: 0 10px;
@@ -93,32 +113,50 @@
   </style>
 </head>
 <body>
-
   <header>
-    <div class="logo-title">
-      <h1>DSRT</h1>
-      <span>Digital Smart Remaster Technology</span>
-    </div>
+    <div class="logo">DSRT</div>
+    <a href="/register.html" class="login-btn">Login / Daftar</a>
   </header>
 
   <div class="hero">
-    Studio kreatif untuk desain visual & restorasi digital
+    <h1>Transformasi Foto Lama Anda Menjadi Karya Baru</h1>
+    <p>Studio kreatif untuk restorasi, desain logo, dan editing visual berbasis AI.</p>
   </div>
 
   <div class="cta">
-    [ UJI COBA GRATIS • GRATIS 100% ]
+    <a href="/register.html">🚀 Coba Sekarang Gratis</a>
   </div>
 
-  <!-- Tombol Upload -->
-  <a href="https://dsrt-soft.vercel.app/api/restore" class="upload-btn">Unggah & Mulai</a>
+  <div class="section-title">Galeri Sebelum & Sesudah</div>
+  <div class="gallery">
+    <img src="https://images.unsplash.com/photo-1504198266285-1653c22a0a9b" alt="before">
+    <img src="https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d" alt="after">
+    <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde" alt="before">
+    <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e" alt="after">
+    <img src="https://images.unsplash.com/photo-1552058544-f2b08422138a" alt="before">
+    <img src="https://images.unsplash.com/photo-1603415526960-f7e0328b43c9" alt="after">
+  </div>
 
-  <div class="section-title">✦ SISTEM DSRT ✦</div>
+  <div class="section-title">Fitur Utama DSRT</div>
+  <div class="features">
+    <div class="feature-box">
+      <h3>Restore Otomatis</h3>
+      <p>Perbaiki warna, kerusakan, dan kualitas foto lama secara otomatis dengan teknologi AI.</p>
+    </div>
+    <div class="feature-box">
+      <h3>Editor Manual + One Tap</h3>
+      <p>Kontrol penuh untuk editing lanjutan atau gunakan fitur instan hanya sekali klik.</p>
+    </div>
+    <div class="feature-box">
+      <h3>Desain Logo Cepat</h3>
+      <p>Ciptakan logo profesional dari template pintar atau mulai dari nol.</p>
+    </div>
+  </div>
 
-  <div class="footer">
+  <footer>
     <a href="#">Tentang Kami</a> |
-    <a href="#">WhatsApp Admin</a> |
-    © DSRT 2025
-  </div>
-
+    <a href="#">WhatsApp Admin</a>
+    <br>© DSRT 2025
+  </footer>
 </body>
 </html>
