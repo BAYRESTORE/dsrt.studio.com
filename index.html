@@ -1,94 +1,110 @@
-<section class="gallery">
-  <h2 style="margin-bottom: 20px;">Preview Restore DSRT</h2>
-  <div class="slider-wrapper">
-    <div class="slider-container" id="sliderContainer">
-      <img src="https://cacwogekvnrrmmnjtmql.supabase.co/storage/v1/object/public/restore/preview-before.jpg" alt="Sebelum" class="slider-img before">
-      <img src="https://cacwogekvnrrmmnjtmql.supabase.co/storage/v1/object/public/restore/preview-after.jpg" alt="Sesudah" class="slider-img after" id="afterImage">
-      <div class="slider-handle" id="sliderHandle"></div>
+<!DOCTYPE html><html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>DSRT Studio – Digital Smart Remaster Technology</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #0f0f0f;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    header {
+      text-align: center;
+      padding: 30px 20px 10px;
+    }
+    header img {
+      height: 60px;
+    }
+    header h1 {
+      font-size: 1.8rem;
+      margin-top: 12px;
+      color: #f0c040;
+    }
+    .preview-section {
+      padding: 30px 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #181818;
+    }
+    .slider-container {
+      position: relative;
+      width: 100%;
+      max-width: 600px;
+      overflow: hidden;
+      border-radius: 16px;
+      box-shadow: 0 0 12px rgba(0,0,0,0.5);
+    }
+    .slider-container img {
+      position: absolute;
+      top: 0; left: 0;
+      height: auto;
+      width: 100%;
+      object-fit: cover;
+      transition: clip-path 0.3s ease;
+    }
+    .slider-handle {
+      position: absolute;
+      top: 0; bottom: 0;
+      width: 4px;
+      background: #f0c040;
+      cursor: ew-resize;
+      z-index: 10;
+    }
+    .cta {
+      text-align: center;
+      margin: 40px 0;
+    }
+    .cta a {
+      background: #f0c040;
+      padding: 14px 28px;
+      color: #000;
+      font-weight: bold;
+      border-radius: 8px;
+      text-decoration: none;
+    }
+    footer {
+      margin-top: auto;
+      text-align: center;
+      padding: 20px;
+      font-size: 0.9rem;
+      color: #aaa;
+    }
+    footer a {
+      color: #f0c040;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>  <header>
+    <img src="https://cacwogekvnrrmmnjtmql.supabase.co/storage/v1/object/public/restore/logo-dsrt.png" alt="DSRT Logo" />
+    <h1>DSRT Studio</h1>
+    <p>Digital Smart Remaster Technology</p>
+  </header>  <section class="preview-section">
+    <div class="slider-container" id="slider">
+      <img src="https://cacwogekvnrrmmnjtmql.supabase.co/storage/v1/object/public/restore/preview-before.jpg" id="beforeImg" alt="Sebelum" />
+      <img src="https://cacwogekvnrrmmnjtmql.supabase.co/storage/v1/object/public/restore/preview-after.jpg" id="afterImg" alt="Sesudah" />
+      <div class="slider-handle" id="handle"></div>
     </div>
-  </div>
-</section>
+  </section>  <div class="cta">
+    <a href="register.html">🚀 Coba Sekarang</a>
+  </div>  <footer>
+    © DSRT 2025 • <a href="https://wa.me/6287838441426">WhatsApp Admin</a> • <a href="#">Tentang Kami</a>
+  </footer>  <script>
+    const slider = document.getElementById('slider');
+    const beforeImg = document.getElementById('beforeImg');
+    const afterImg = document.getElementById('afterImg');
+    const handle = document.getElementById('handle');
 
-<style>
-.gallery {
-  width: 90%;
-  max-width: 900px;
-  margin: 80px auto;
-  text-align: center;
-}
+    let isDragging = false;
 
-.slider-wrapper {
-  position: relative;
-  width: 100%;
-  overflow: hidden;
-  border-radius: 16px;
-  box-shadow: 0 0 20px rgba(0,0,0,0.4);
-}
-
-.slider-container {
-  position: relative;
-  width: 100%;
-  height: auto;
-  cursor: ew-resize;
-}
-
-.slider-img {
-  display: block;
-  width: 100%;
-  height: auto;
-  object-fit: cover;
-  pointer-events: none;
-}
-
-.slider-img.before {
-  position: relative;
-  z-index: 1;
-}
-
-.slider-img.after {
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 2;
-  width: 100%;
-  height: auto;
-  clip-path: inset(0 50% 0 0);
-  transition: clip-path 0.05s ease;
-}
-
-.slider-handle {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  z-index: 3;
-  width: 4px;
-  height: 100%;
-  background-color: #f0c040;
-}
-</style>
-
-<script>
-const container = document.getElementById('sliderContainer');
-const handle = document.getElementById('sliderHandle');
-const afterImage = document.getElementById('afterImage');
-
-function updateSlider(x) {
-  const bounds = container.getBoundingClientRect();
-  let offsetX = x - bounds.left;
-  offsetX = Math.max(0, Math.min(offsetX, bounds.width));
-
-  const percentage = (offsetX / bounds.width) * 100;
-  handle.style.left = percentage + '%';
-  afterImage.style.clipPath = `inset(0 ${100 - percentage}% 0 0)`;
-}
-
-container.addEventListener('mousemove', (e) => {
-  updateSlider(e.clientX);
-});
-
-container.addEventListener('touchmove', (e) => {
-  if (e.touches.length > 0) {
-    updateSlider(e.touches[0].clientX);
-  }
-});
-</script>
+    const moveSlider = (e) => {
+      const rect = slider.getBoundingClientRect();
+      let pos = (e.clientX || e.touches[0].clientX) - rect.left;
+      pos = Math.max(0, Math.min(pos, rect.width));
+      afterImg.style.clipPath = `inset(0
