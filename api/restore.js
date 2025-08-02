@@ -1,25 +1,7 @@
 export default async function handler(req, res) {
   if (req.method !== "POST") {
     return res.status(405).json({ error: "Method not allowed" });
-  }gitignore
-3 hours ago
-CODE_OF_CONDUCT.md
-2 hours ago
-CONTRIBUTING.md
-2 hours ago
-LICENSE
-2 hours ago
-README.md
-2 hours ago
-SECURITY.md
-2 hours ago
-index.html
-2 hours ago
-menu.html
-4 hours ago
-restore.html
-16 hours ago
-script.js
+  }
 
   const { image } = req.body;
   if (!image) {
@@ -27,6 +9,7 @@ script.js
   }
 
   try {
+    console.log("Sending request to Replicate...");
     const response = await fetch("https://api.replicate.com/v1/predictions", {
       method: "POST",
       headers: {
@@ -40,6 +23,7 @@ script.js
     });
 
     const prediction = await response.json();
+    console.log("Replicate response:", prediction);
 
     if (prediction.error) {
       return res.status(500).json({ error: prediction.error });
@@ -47,7 +31,6 @@ script.js
 
     const predictionId = prediction.id;
 
-    // Polling untuk hasilnya
     let output = null;
     while (!output) {
       await new Promise((resolve) => setTimeout(resolve, 1500));
@@ -59,6 +42,8 @@ script.js
       });
 
       const pollResult = await pollResponse.json();
+      console.log("Polling result:", pollResult);
+
       if (pollResult.error) {
         return res.status(500).json({ error: pollResult.error });
       }
