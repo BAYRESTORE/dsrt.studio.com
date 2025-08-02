@@ -1,35 +1,44 @@
-export default async function handler(req, res) {
+const fetch = require("node-fetch");
+
+module.exports = async (req, res) => {
   if (req.method !== "POST") {
     return res.status(405).json({ error: "Method not allowed" });
   }
 
-  const { image } = req.body;
-  if (!image) {
-    return res.status(400).json({ error: "No image provided" });
-  }
+  let body = "";
+  req.on("data", (chunk) => {
+    body += chunk.toString();
+  });
 
-  try {
-    const response = await fetch("https://api.replicate.com/v1/predictions", {
-      method: "POST",
-      headers: {
-        Authorization: `Token ${process.env.REPLICATE_API_TOKEN}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        version: "928d54a5e1394b8fb9e3792017d86f3f84b2aa6dd454df1c00f6f9e6d31c01cf",
-        input: { image },
-      }),
-    });
+  req.on("end", async () => {
+    try {
+      const parsedBody = JSON.parse(body);
+      const image = parsedBody?.image;
 
-    const result = await response.json();
+      if (!image) {
+        return res.status(400).json({ error: "No image provided" });
+      }
 
-    if (result.error) {
-      return res.status(500).json({ error: result.error });
+      const replicateResponse = await fetch("https://api.replicate.com/v1/predictions", {
+        method: "POST",
+        headers: {
+          Authorization: `Token ${process.env.REPLICATE_API_TOKEN}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          version: "9286b1e0b4757068c06387403d9399c34f6990ec048c8d4df25362c0bfa25b10",
+          input: {
+            image: image,
+            scale: 2,
+            face_enhance: true,
+          },
+        }),
+      });
+
+      const prediction = await replicateResponse.json();
+      return res.status(200).json(prediction);
+    } catch (error) {
+      return res.status(500).json({ error: error.message });
     }
-
-    return res.status(200).json(result);
-  } catch (error) {
-    console.error("Error during image restoration:", error);
-    return res.status(500).json({ error: "Failed to restore image" });
-  }
-                                 }
+  });
+};
