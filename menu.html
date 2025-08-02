@@ -2,139 +2,14 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>DSRT Studio – AI Photo Restore</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #111;
-      color: #fff;
-      text-align: center;
-      padding: 20px;
-    }
-    input[type="file"] {
-      padding: 0.5rem;
-      border-radius: 6px;
-      border: 1px solid #444;
-      background: #333;
-      color: white;
-      cursor: pointer;
-    }
-    button {
-      padding: 0.7rem 1.2rem;
-      margin-left: 1rem;
-      background-color: #29a19c;
-      border: none;
-      border-radius: 6px;
-      color: white;
-      font-weight: bold;
-      cursor: pointer;
-    }
-    button:hover {
-      background-color: #248a86;
-    }
-    .slider-container {
-      position: relative;
-      width: 90%;
-      max-width: 600px;
-      margin: 20px auto;
-      overflow: hidden;
-      border-radius: 12px;
-      box-shadow: 0 0 15px rgba(0,0,0,0.5);
-    }
-    .slider-wrapper {
-      position: relative;
-      height: 400px;
-      overflow: hidden;
-    }
-    #beforeImage {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      position: relative;
-      z-index: 1;
-    }
-    #afterImage {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 50%;
-      height: 100%;
-      object-fit: contain;
-      border-right: 2px solid white;
-      z-index: 2;
-      overflow: hidden;
-    }
-    #slider {
-      width: 90%;
-      margin: 20px auto;
-    }
-  </style>
+  <title>Restore AI Minimal</title>
 </head>
 <body>
-  <h1>DSRT Studio – Restore Foto AI Gratis</h1>
-
-  <input type="file" id="uploadInput" accept="image/*" />
+  <h1>Upload Gambar untuk Restore</h1>
+  <input type="file" id="upload" accept="image/*" />
   <button id="restoreBtn">Mulai Restore</button>
+  <div id="result"></div>
 
-  <div class="slider-container" id="resultSection" style="display:none;">
-    <div class="slider-wrapper">
-      <img id="beforeImage" src="" alt="Before" />
-      <img id="afterImage" src="" alt="After" />
-    </div>
-  </div>
-
-  <script>
-    const uploadInput = document.getElementById('uploadInput');
-    const restoreBtn = document.getElementById('restoreBtn');
-    const beforeImage = document.getElementById('beforeImage');
-    const afterImage = document.getElementById('afterImage');
-    const resultSection = document.getElementById('resultSection');
-
-    restoreBtn.addEventListener('click', async () => {
-      const file = uploadInput.files[0];
-      if (!file) {
-        alert('Pilih gambar terlebih dahulu!');
-        return;
-      }
-
-      beforeImage.src = URL.createObjectURL(file);
-      afterImage.src = '';
-      resultSection.style.display = 'block';
-
-      // Baca file jadi base64
-      const base64 = await new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.onload = () => resolve(reader.result);
-        reader.onerror = () => reject('Gagal baca file');
-        reader.readAsDataURL(file);
-      });
-
-      restoreBtn.disabled = true;
-      restoreBtn.textContent = 'Memproses...';
-
-      try {
-        const res = await fetch('/api/restore', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ image: base64 }),
-        });
-        const data = await res.json();
-
-        if (data.output) {
-          afterImage.src = data.output;
-        } else {
-          alert('Gagal restore gambar.');
-          afterImage.src = '';
-        }
-      } catch (error) {
-        alert('Terjadi kesalahan server.');
-        console.error(error);
-      } finally {
-        restoreBtn.disabled = false;
-        restoreBtn.textContent = 'Mulai Restore';
-      }
-    });
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
