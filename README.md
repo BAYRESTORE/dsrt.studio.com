@@ -1,8 +1,6 @@
----
-
 # DSRT Studio – AI Photo Restoration Platform
 
-**DSRT Studio** adalah platform AI restorasi foto otomatis dan manual untuk memperbaiki foto rusak, buram, atau hitam putih menjadi jernih, berwarna, dan natural. Dibangun dengan teknologi Real-ESRGAN, Supabase, dan Vercel – cocok untuk pengguna umum hingga profesional restorasi.
+**DSRT Studio** adalah platform restorasi foto AI dengan tingkat akurasi tinggi, dirancang untuk mempertahankan identitas wajah dan detail latar belakang secara utuh.
 
 🌐 Website: [dsrt-studio-com.vercel.app](https://dsrt-studio-com.vercel.app)
 
@@ -10,87 +8,42 @@
 
 ## 🚀 Fitur Utama
 
-- 🔁 **Slider Before–After**: Bandingkan foto asli & hasil restore secara visual.
-- 🎨 **Restore Otomatis dengan AI**: Perbaikan resolusi dan warna alami.
-- 📷 **Dukung Foto Hitam-Putih & Rusak**: Deteksi wajah dan latar belakang secara cerdas.
-- 🆓 **3x Restore Gratis Tanpa Login**: Setelah itu diberi watermark & efek blur.
-- 🖼️ **Watermark Transparan Otomatis**: Menggunakan DSRT logo dari Supabase.
-- 🔒 **Keamanan Tinggi (Bintang 7)**: Anti-spam, NSFW filter, dan tanpa data pengguna disimpan.
-- 📤 **Unduh & Cetak**: Hasil bisa disimpan dalam berbagai resolusi.
-- 📁 **Tanpa Login/Database Manual**: Full frontend + Supabase storage + serverless function.
+- 🖼️ **Slider Before–After**: Bandingkan foto asli dan hasil restore secara visual.
+- 🎨 **Restore Otomatis dengan AI**: Menggunakan Real-ESRGAN dan CodeFormer.
+- 🔓 **3x Gratis Tanpa Login**: Bisa langsung digunakan tanpa registrasi.
+- 💧 **Watermark & Blur Otomatis**: Aktif otomatis setelah restore ke-4.
+- 📦 **Supabase Storage**: Menyimpan dan menampilkan hasil dari Supabase.
+- 🔒 **Keamanan Bintang 7**: Tanpa webhook, hanya serverless API. Tidak menyimpan data pribadi.
+
+## 📂 Struktur Proyek
+
+/public              # HTML statis /api/restore.js      # Serverless function: panggil Replicate API /script.js           # Frontend restore + watermark + counter /supabase.js         # Koneksi ke Supabase /LICENSE             # Lisensi MIT /README.md           # Dokumentasi proyek ini
+
+## 🛡️ Security
+
+- ❌ Deteksi otomatis NSFW (AI filter).
+- 🔐 Restore ke-4+ diberi blur dan watermark transparan penuh.
+- 🧼 Tidak menyimpan data pribadi pengguna.
+- 🚫 Tidak ada login untuk 3x gratis pertama.
+- ☁️ Semua proses via serverless API — tanpa webhook.
+
+## 📜 Lisensi
+
+MIT License © 2025 DSRT Studio
+
+> Kamu bebas menggunakan, memodifikasi, dan menyebarluaskan proyek ini untuk tujuan apapun, selama menyertakan atribusi kepada pembuat aslinya.  
+> Lihat bagian berikut ini untuk isi lengkap lisensinya.
 
 ---
 
-## 🧠 Teknologi
+## 📄 LICENSE
 
-- **Frontend**: HTML5, CSS3, JavaScript (vanilla), slider interaktif.
-- **Backend**: Serverless function (`/api/restore.js`) di Vercel.
-- **AI**: Real-ESRGAN (via Replicate API).
-- **Storage**: Supabase bucket (public restore).
-- **Hosting**: Vercel (`dsrt-studio-com.vercel.app`).
-- **Keamanan**: NSFW detection, blur + watermark di restore ke-4+.
+MIT License
 
----
+Copyright (c) 2025 DSRT Studio
 
-## ⚙️ Cara Deploy
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
-### 1. Setup di Vercel
-- Buat akun Vercel dan hubungkan repo GitHub kamu.
-- Pastikan `api/restore.js` dikenali sebagai serverless function.
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
-### 2. Tambahkan Replicate API Key
-Masukkan ke **Vercel → Project Settings → Environment Variables**:
-
-| Name                  | Value                    |
-|-----------------------|--------------------------|
-| `REPLICATE_API_TOKEN` | (isi token kamu di sini) |
-
-### 3. Supabase Bucket untuk Watermark
-Gunakan Supabase sebagai storage gambar.  
-Simpan watermark transparan DSRT di folder `restore/`.
-
-Contoh URL watermark transparan:
-
-https://cacwogekvnrrmmnjtmql.supabase.co/storage/v1/object/public/restore/file_00000000b41061f796a38f3d9fb3a9ae.png
-
----
-
-## 📁 Struktur Folder
-
-/ ├── index.html         # Landing page ├── menu.html          # Halaman utama upload + restore ├── restore.html       # Halaman untuk restorasi manual ├── script.js          # Restore logic + slider + watermarking ├── api/ │   └── restore.js     # Serverless function: Real-ESRGAN ├── .gitignore ├── LICENSE ├── SECURITY.md ├── CONTRIBUTING.md ├── README.md
-
----
-
-## 🛠️ Kontribusi
-
-Ingin bantu proyek ini? Silakan baca [CONTRIBUTING.md](./CONTRIBUTING.md) untuk panduan lengkap.  
-Kontribusi dalam bentuk kode, saran, atau bug report sangat kami apresiasi!
-
----
-
-## 🔐 Keamanan
-
-Kami mematuhi standar keamanan tinggi (“bintang 7”), termasuk:
-
-- Tidak menyimpan informasi pribadi pengguna.
-- Filter konten NSFW (wanita telanjang ditolak, anak-anak disensor).
-- Restore ke-4+ diberi watermark penuh + efek blur.
-- Validasi jenis file, serta akses Supabase publik & terbatas.
-
-Baca lebih lanjut di [SECURITY.md](./SECURITY.md)
-
----
-
-## 📄 Dokumen Tambahan
-
-- 📜 [LICENSE](./LICENSE) – MIT License
-- 🛠️ [CONTRIBUTING.md](./CONTRIBUTING.md)
-- 🔐 [SECURITY.md](./SECURITY.md)
-
----
-
-## 💼 Lisensi
-
-MIT License – bebas digunakan, dimodifikasi, dan dikomersialkan dengan mencantumkan kredit ke proyek ini.
-
----
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
