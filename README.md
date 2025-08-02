@@ -16,7 +16,28 @@
 - 📱 **Kompatibel Mobile/Android + Desktop**
 - ⚡ **3x Restore Gratis** tanpa login
 
----
+------
+
+## 🛠️ Layanan Tambahan
+
+Selain fitur AI otomatis, DSRT Studio juga menawarkan:
+
+### 📷 Restore Manual (Premium)
+Untuk hasil terbaik yang melibatkan sentuhan manusia:
+- Perbaikan tingkat lanjut
+- Restorasi wajah dengan referensi
+- Pewarnaan artistik khusus
+
+Hubungi kami via email atau DM FB untuk estimasi harga & pengerjaan.
+
+### 🎨 Jasa Desain Visual & Branding
+Kami juga menerima permintaan desain seperti:
+- Logo dan identitas usaha
+- Banner / Spanduk / Neonbox
+- Kartu Nama / Brosur Digital
+- Desain digital lainnya (siap cetak)
+
+Contoh karya tersedia di landing page.
 
 ## 🧩 Teknologi yang Digunakan
 
