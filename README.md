@@ -51,63 +51,46 @@ Simpan watermark transparan DSRT di folder `restore/`.
 
 Contoh URL watermark transparan:
 
-https://cacwogekvnrrmmnjtmql.supabase.co/storage/v1/object/public/restore//file_00000000b41061f796a38f3d9fb3a9ae.png
+https://cacwogekvnrrmmnjtmql.supabase.co/storage/v1/object/public/restore/file_00000000b41061f796a38f3d9fb3a9ae.png
 
 ---
 
 ## 📁 Struktur Folder
 
-```bash
-/
-├── index.html         # Landing page
-├── menu.html          # Halaman utama upload + restore
-├── restore.html       # Halaman untuk restorasi manual
-├── script.js          # Restore logic + slider + watermarking
-├── api/
-│   └── restore.js     # Serverless function: Real-ESRGAN
-├── .gitignore
-├── README.md
-├── LICENSE
-├── SECURITY.md
-├── CONTRIBUTING.md
-
+/ ├── index.html         # Landing page ├── menu.html          # Halaman utama upload + restore ├── restore.html       # Halaman untuk restorasi manual ├── script.js          # Restore logic + slider + watermarking ├── api/ │   └── restore.js     # Serverless function: Real-ESRGAN ├── .gitignore ├── LICENSE ├── SECURITY.md ├── CONTRIBUTING.md ├── README.md
 
 ---
 
-🛠️ Kontribusi
+## 🛠️ Kontribusi
 
-Ingin bantu proyek ini? Silakan baca CONTRIBUTING.md untuk panduan lengkap berkontribusi.
+Ingin bantu proyek ini? Silakan baca [CONTRIBUTING.md](./CONTRIBUTING.md) untuk panduan lengkap.  
 Kontribusi dalam bentuk kode, saran, atau bug report sangat kami apresiasi!
 
-
 ---
 
-🔐 Keamanan
+## 🔐 Keamanan
 
 Kami mematuhi standar keamanan tinggi (“bintang 7”), termasuk:
 
-Tidak menyimpan informasi pribadi pengguna
+- Tidak menyimpan informasi pribadi pengguna.
+- Filter konten NSFW (wanita telanjang ditolak, anak-anak disensor).
+- Restore ke-4+ diberi watermark penuh + efek blur.
+- Validasi jenis file, serta akses Supabase publik & terbatas.
 
-Filter konten NSFW (wanita telanjang ditolak, anak-anak disensor)
-
-Restore ke-4+ diberi watermark penuh + efek blur
-
-Validasi jenis file, serta akses Supabase publik & terbatas
-
-
-📖 Baca lebih lanjut di SECURITY.md
-
+Baca lebih lanjut di [SECURITY.md](./SECURITY.md)
 
 ---
 
-📄 Dokumen Tambahan
+## 📄 Dokumen Tambahan
 
-📜 LICENSE – MIT
+- 📜 [LICENSE](./LICENSE) – MIT License
+- 🛠️ [CONTRIBUTING.md](./CONTRIBUTING.md)
+- 🔐 [SECURITY.md](./SECURITY.md)
 
-🛠️ Panduan Kontribusi
+---
 
-🔐 Kebijakan Keamanan
+## 💼 Lisensi
 
-
+MIT License – bebas digunakan, dimodifikasi, dan dikomersialkan dengan mencantumkan kredit ke proyek ini.
 
 ---
