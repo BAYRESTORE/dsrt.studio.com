@@ -3,238 +3,172 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>DSRT Studio</title>
+  <title>DSRT Studio – AI Photo Restoration</title>
   <style>
     body {
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background: #0e0e0e;
+      font-family: Arial, sans-serif;
+      background: #111;
       color: #fff;
+      margin: 0;
+      padding: 0;
+      text-align: center;
     }
 
     header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 16px 32px;
-      background: rgba(0,0,0,0.7);
-      position: sticky;
-      top: 0;
-      z-index: 100;
+      background-color: #1e1e1e;
+      padding: 1rem;
     }
 
-    header img {
-      height: 40px;
-    }
-
-    header button {
-      background: #f0c040;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 8px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    .hero {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 60px 20px 30px;
-      text-align: center;
-    }
-
-    .hero h1 {
-      font-size: 2.2rem;
-      color: #f0c040;
+    h1 {
+      margin: 0;
+      font-size: 1.5rem;
     }
 
     .slider-container {
-      max-width: 400px;
-      width: 100%;
-      margin: 40px auto;
       position: relative;
-    }
-
-    .slider-image-wrapper {
-      position: relative;
-      width: 100%;
+      width: 90%;
+      max-width: 600px;
+      margin: 2rem auto;
       overflow: hidden;
-      cursor: ew-resize;
       border-radius: 12px;
-      aspect-ratio: 3/4;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
     }
 
-    .slider-image-wrapper img {
+    .slider-container img {
       width: 100%;
-      position: absolute;
-      top: 0;
-      left: 0;
-      height: 100%;
-      object-fit: cover;
-      user-select: none;
+      display: block;
     }
 
-    .slider-image-wrapper img.before {
-      z-index: 1;
+    .form-section {
+      margin-top: 2rem;
     }
 
-    .slider-image-wrapper img.after {
-      z-index: 2;
-      clip-path: inset(0 50% 0 0);
-      transition: clip-path 0.1s;
-    }
-
-    .slider-handle {
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      left: 50%;
-      width: 4px;
-      background: #f0c040;
-      z-index: 3;
-      transform: translateX(-2px);
-      pointer-events: none;
-    }
-
-    .actions {
-      margin: 40px 0;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-      align-items: center;
-    }
-
-    .actions button {
+    input[type="file"] {
+      padding: 0.5rem;
       background: #333;
-      color: #fff;
-      padding: 14px 24px;
-      border: 1px solid #666;
-      border-radius: 10px;
-      font-size: 1.1rem;
+      color: white;
+      border: 1px solid #444;
+      border-radius: 6px;
+    }
+
+    button {
+      padding: 0.7rem 1.2rem;
+      margin-left: 1rem;
+      background-color: #29a19c;
+      border: none;
+      border-radius: 6px;
+      color: white;
+      font-weight: bold;
       cursor: pointer;
     }
 
+    button:hover {
+      background-color: #248a86;
+    }
+
     footer {
-      text-align: center;
-      padding: 20px;
-      color: #aaa;
-      background: #111;
+      margin-top: 4rem;
+      font-size: 0.85rem;
+      color: #888;
     }
 
-    #login-popup {
-      display: none;
-      position: fixed;
-      top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      background: #222;
-      padding: 30px;
-      border-radius: 12px;
-      z-index: 1000;
-      max-width: 320px;
-      width: 90%;
+    .nav-links {
+      margin-top: 1rem;
     }
 
-    #login-popup input {
+    .nav-links a {
+      color: #29a19c;
+      text-decoration: none;
+      margin: 0 10px;
+    }
+
+    .slider-wrapper {
+      position: relative;
+      overflow: hidden;
+    }
+
+    #afterImage {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 50%;
+      height: 100%;
+      object-fit: cover;
+      overflow: hidden;
+      border-right: 2px solid white;
+      z-index: 2;
+    }
+
+    #beforeImage {
       width: 100%;
-      padding: 10px;
-      margin-bottom: 12px;
-      border-radius: 6px;
-      border: none;
-    }
-
-    #login-popup button {
-      background: #f0c040;
-      color: #000;
-      padding: 10px;
-      width: 100%;
-      border: none;
-      border-radius: 6px;
-      font-weight: bold;
-    }
-
-    #overlay {
-      display: none;
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(0,0,0,0.6);
-      z-index: 900;
+      height: auto;
     }
   </style>
 </head>
 <body>
-
   <header>
-    <img src="https://cacwogekvnrrmmnjtmql.supabase.co/storage/v1/object/public/restore/logo-dsrt.png" alt="DSRT Logo">
-    <button onclick="openLogin()">Login</button>
+    <h1>DSRT Studio – Restore Foto AI Gratis</h1>
+    <div class="nav-links">
+      <a href="menu.html">Unggah & Restore</a>
+      <a href="manual.html">Manual Tools</a>
+      <a href="logo.html">Logo Tools</a>
+    </div>
   </header>
 
-  <section class="hero">
-    <h1>Digital Smart Remaster Technology</h1>
-    <p>Preview hasil sebelum dan sesudah secara langsung</p>
-
-    <div class="slider-container">
-      <div class="slider-image-wrapper" id="sliderWrapper">
-        <img src="https://cacwogekvnrrmmnjtmql.supabase.co/storage/v1/object/public/restore/preview-before.jpg" class="before" />
-        <img src="https://cacwogekvnrrmmnjtmql.supabase.co/storage/v1/object/public/restore/preview-after.jpg" class="after" id="sliderImg" />
-        <div class="slider-handle" id="sliderHandle"></div>
-      </div>
+  <div class="slider-container">
+    <div class="slider-wrapper">
+      <img id="beforeImage" src="https://via.placeholder.com/600x400?text=Before" alt="Before" />
+      <img id="afterImage" src="https://via.placeholder.com/600x400?text=After" alt="After" />
     </div>
-
-    <div class="actions">
-      <button onclick="location.href='register.html'">Unggah & Mulai Restore</button>
-      <button onclick="location.href='https://dsrt-soft.vercel.app/manual'">Manual + One Tap</button>
-      <button onclick="location.href='https://dsrt-soft.vercel.app/logo'">Desain Logo</button>
-    </div>
-  </section>
-
-  <footer>
-    © DSRT 2025 • <a href="https://wa.me/6287838441426" style="color: #f0c040;">WhatsApp Admin</a>
-  </footer>
-
-  <!-- Login Popup -->
-  <div id="overlay" onclick="closeLogin()"></div>
-  <div id="login-popup">
-    <h3>Login Akun</h3>
-    <input type="email" placeholder="Email" />
-    <input type="password" placeholder="Password" />
-    <small><a href="#" style="color: #f0c040;">Lupa Password?</a></small><br><br>
-    <button>Masuk</button>
   </div>
 
+  <div class="form-section">
+    <form id="restoreForm" enctype="multipart/form-data">
+      <input type="file" name="image" accept="image/*" required />
+      <button type="submit">Mulai Restore Sekarang</button>
+    </form>
+  </div>
+
+  <footer>
+    &copy; 2025 DSRT Studio – Powered by AI & Cinta Foto Lama
+  </footer>
+
   <script>
-    const sliderWrapper = document.getElementById('sliderWrapper');
-    const sliderImg = document.getElementById('sliderImg');
-    const sliderHandle = document.getElementById('sliderHandle');
+    const form = document.getElementById("restoreForm");
+    const beforeImg = document.getElementById("beforeImage");
+    const afterImg = document.getElementById("afterImage");
 
-    sliderWrapper.addEventListener('mousemove', (e) => {
-      const bounds = sliderWrapper.getBoundingClientRect();
-      const x = e.clientX - bounds.left;
-      const percent = Math.max(0, Math.min(100, (x / bounds.width) * 100));
-      sliderImg.style.clipPath = `inset(0 ${100 - percent}% 0 0)`;
-      sliderHandle.style.left = `${percent}%`;
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const fileInput = form.querySelector("input[name='image']");
+      const file = fileInput.files[0];
+      if (!file) return alert("Pilih gambar terlebih dahulu.");
+
+      const formData = new FormData();
+      formData.append("image", file);
+
+      // Tampilkan gambar asli sebagai "Before"
+      beforeImg.src = URL.createObjectURL(file);
+
+      afterImg.src = "https://via.placeholder.com/600x400?text=Processing...";
+      try {
+        const res = await fetch("/api/restore", {
+          method: "POST",
+          body: formData,
+        });
+        const data = await res.json();
+        if (data?.restored) {
+          afterImg.src = data.restored;
+        } else {
+          afterImg.src = "https://via.placeholder.com/600x400?text=Gagal+Restore";
+          alert("Gagal restore. Silakan coba lagi.");
+        }
+      } catch (err) {
+        console.error(err);
+        afterImg.src = "https://via.placeholder.com/600x400?text=Error+Server";
+        alert("Terjadi kesalahan saat restore.");
+      }
     });
-
-    sliderWrapper.addEventListener('touchmove', (e) => {
-      const touch = e.touches[0];
-      const bounds = sliderWrapper.getBoundingClientRect();
-      const x = touch.clientX - bounds.left;
-      const percent = Math.max(0, Math.min(100, (x / bounds.width) * 100));
-      sliderImg.style.clipPath = `inset(0 ${100 - percent}% 0 0)`;
-      sliderHandle.style.left = `${percent}%`;
-    });
-
-    function openLogin() {
-      document.getElementById('overlay').style.display = 'block';
-      document.getElementById('login-popup').style.display = 'block';
-    }
-
-    function closeLogin() {
-      document.getElementById('overlay').style.display = 'none';
-      document.getElementById('login-popup').style.display = 'none';
-    }
   </script>
-
 </body>
 </html>
