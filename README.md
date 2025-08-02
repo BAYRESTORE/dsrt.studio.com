@@ -1,141 +1,94 @@
-DSRT Studio – AI Photo Restoration Platform
+# 🖼️ DSRT Studio – AI Photo Restore & Colorize Platform
 
-DSRT Studio adalah platform restorasi foto AI dengan tingkat akurasi tinggi, dirancang untuk mempertahankan identitas wajah dan detail latar belakang secara utuh.
+**DSRT Studio** adalah platform restorasi foto berbasis AI yang dirancang untuk memperbaiki foto rusak, buram, atau hitam-putih menjadi tajam dan berwarna natural — sambil mempertahankan identitas wajah, emosi, dan seluruh elemen foto secara utuh.
 
-🌐 Website: dsrt-studio-com.vercel.app
-📧 Email: dsrt.official71@gmail.com
-📸 Instagram: @dsrt.official.2025
-
+> 🔗 Live: [https://dsrt-studio-com.vercel.app](https://dsrt-studio-com.vercel.app)
 
 ---
 
-🚀 Fitur Utama
+## ✨ Fitur Unggulan
 
-🖼️ Slider Before–After: Bandingkan foto asli dan hasil restore secara visual.
-
-🎨 Restore Otomatis dengan AI: Menggunakan Real-ESRGAN dan CodeFormer (via Replicate API).
-
-🔓 3x Gratis Tanpa Login: Bisa langsung digunakan tanpa registrasi.
-
-💧 Watermark & Blur Otomatis: Aktif otomatis setelah restore ke-4.
-
-📦 Supabase Storage: Menyimpan dan menampilkan hasil dari Supabase bucket.
-
-🔒 Keamanan Bintang 7: Tanpa webhook, tanpa penyimpanan data pribadi pengguna.
-
-
+- ✅ **Restore AI Otomatis** via Real-ESRGAN (dan CodeFormer mendatang)
+- 🎚️ **Before–After Slider** dengan drag geser intuitif
+- 🎨 **Colorize Foto BW/Sepia** (terjaga natural, tidak over-saturasi)
+- 🔍 **Preservasi Detail Penuh**: wajah, tekstur, latar belakang, dan pola
+- 🔐 **Keamanan Bintang 7** (validasi NSFW, blur, watermark)
+- 📱 **Kompatibel Mobile/Android + Desktop**
+- ⚡ **3x Restore Gratis** tanpa login
 
 ---
 
-📂 Struktur Proyek
+## 🧩 Teknologi yang Digunakan
 
-/public              # HTML statis (menu.html, index.html)  
-/api/restore.js      # Serverless function panggil Replicate (Real-ESRGAN)  
-/script.js           # Restore logic + slider + watermark + counter  
-/supabase.js         # Koneksi frontend ke Supabase Storage  
-/README.md           # Dokumentasi proyek ini  
-/LICENSE             # Lisensi MIT  
-  
-  
----  
-  
-🛡️ Keamanan  
-  
-❌ Deteksi otomatis konten NSFW (AI filter terintegrasi).  
-  
-🔐 Restore ke-4+ otomatis diberi watermark DSRT + blur + ikon gembok.  
-  
-🧼 Tidak menyimpan data pribadi pengguna.  
-  
-🚫 Tidak ada login selama masa gratis digunakan.  
-  
-☁️ Semua proses melalui serverless function — tanpa webhook.  
-  
-  
-  
----  
-  
-⚙️ Teknologi Digunakan  
-  
-Frontend: HTML statis, JavaScript, Supabase Storage.  
-  
-Backend: Serverless API (api/restore.js) – Vercel.  
-  
-AI Model: Real-ESRGAN + CodeFormer via Replicate API.  
-  
-Hosting: Vercel (Static Deployment).  
-  
-Storage: Supabase Bucket (restore).  
-  
-  
-  
----  
-  
-🧪 Cara Penggunaan  
-  
-1. Buka dsrt-studio-com.vercel.app.  
-  
-  
-2. Unggah foto rusak melalui halaman Restore Otomatis.  
-  
-  
-3. Klik tombol "Mulai Restore".  
-  
-  
-4. Bandingkan hasilnya di slider Before–After.  
-  
-  
-5. Jika baru pertama kali, kamu bisa restore gratis sampai 3 kali.  
-  
-  
-6. Setelah itu, hasil akan diberi watermark & blur.  
-  
-  
-  
-  
----  
-  
-📜 Lisensi  
-  
-MIT License © 2025 DSRT Studio  
-  
-> Kamu bebas menggunakan, memodifikasi, dan menyebarluaskan proyek ini untuk tujuan apapun, selama menyertakan atribusi kepada pembuat aslinya.  
-  
-  
-  
-Isi Lisensi:  
-  
-MIT License  
-  
-Copyright (c) 2025 DSRT Studio  
-  
-Permission is hereby granted, free of charge, to any person obtaining a copy  
-of this software and associated documentation files (the "Software"), to deal  
-in the Software without restriction, including without limitation the rights  
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell  
-copies of the Software, and to permit persons to whom the Software is  
-furnished to do so, subject to the following conditions:  
-  
-The above copyright notice and this permission notice shall be included in all  
-copies or substantial portions of the Software.  
-  
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR  
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,  
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE  
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER  
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,  
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE  
-SOFTWARE.  
-  
-  
----  
-  
-🤝 Kontribusi  
-  
-Pull Request sangat disambut.  
-Silakan fork repo ini, lakukan perubahanmu, dan kirim PR.  
-  
-  
----  
-  
-Developed with ❤️ by DSRT Studio
+| Layer       | Teknologi                                 |
+|-------------|--------------------------------------------|
+| Frontend    | HTML/CSS/JS Static, SliderJS              |
+| Backend     | Serverless function di `api/restore.js`   |
+| AI Model    | Real-ESRGAN via Replicate API             |
+| Penyimpanan | Supabase (Bucket: `restore`)              |
+| Hosting     | Vercel                                     |
+
+---
+
+## 📸 Cara Penggunaan
+
+1. Kunjungi [dsrt-studio-com.vercel.app](https://dsrt-studio-com.vercel.app)
+2. Unggah foto rusak
+3. Klik tombol **"Mulai Restore"**
+4. Hasil akan ditampilkan dalam gaya before–after
+5. Untuk restore ke-4 ke atas, hasil akan:
+   - Diberi watermark transparan penuh
+   - Diblur setengah dengan ikon gembok
+   - Diberi tombol unduh & cetak beresolusi berbeda
+
+---
+
+## 🛡️ Keamanan
+
+- Validasi konten NSFW (wanita telanjang ditolak, pria shirtless dan anak-anak non eksplisit diperbolehkan)
+- Restore dilakukan langsung di browser (tanpa upload permanen)
+- Sistem blur & watermark otomatis untuk restore ke-4+
+- Proteksi terhadap abuse, XSS, CSRF, SSRF
+- Detail: [SECURITY.md](./SECURITY.md)
+
+---
+
+## 🤝 Kontribusi
+
+Kami menyambut kontribusi dari komunitas!  
+Lihat panduan lengkap di: [CONTRIBUTING.md](./CONTRIBUTING.md)
+
+### Format Commit:
+
+- `feat:` Tambah fitur  
+- `fix:` Perbaikan  
+- `docs:` Dokumentasi  
+- `refactor:` Reorganisasi kode  
+- `style:` Format/komentar
+
+---
+
+## 🧪 Developer Notes
+
+- Struktur file **tidak boleh diubah**
+- Semua pemrosesan dilakukan via frontend/serverless (tanpa Node build system)
+- Jangan kirim file `.zip`, `node_modules`, atau build
+- Gunakan `localStorage` untuk sistem batas restore gratis
+- Integrasi penuh dengan Supabase & Replicate
+
+---
+
+## 🗃️ Repositori Terkait
+
+- **Frontend**: `index.html`, `menu.html`, `script.js`, `style.css`
+- **Serverless Restore**: `api/restore.js`
+- **Assets**: Supabase Storage (watermark & hasil restore)
+
+---
+
+## 🙏 Terima Kasih
+
+Platform ini dibangun untuk membantu komunitas pengeditan foto, khususnya pengguna Facebook yang memiliki kenangan rusak.  
+Terima kasih atas semua feedback & kontribusi!
+
+> 📬 Kontak: dsrt.restore@gmail.com
