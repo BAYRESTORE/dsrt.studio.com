@@ -1,6 +1,4 @@
-const fetch = require("node-fetch");
-
-module.exports = async function handler(req, res) {
+export default async function handler(req, res) {
   if (req.method !== "POST") {
     return res.status(405).json({ error: "Method not allowed" });
   }
@@ -18,48 +16,20 @@ module.exports = async function handler(req, res) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        version: "928d54a5e1394b8fb9e3792017d86f3f84b2aa6dd454df1c00f6f9e6d31c01cf", // Real-ESRGAN
+        version: "928d54a5e1394b8fb9e3792017d86f3f84b2aa6dd454df1c00f6f9e6d31c01cf",
         input: { image },
       }),
     });
 
-    const prediction = await response.json();
+    const result = await response.json();
 
-    if (prediction.error) {
-      return res.status(500).json({ error: prediction.error });
+    if (result.error) {
+      return res.status(500).json({ error: result.error });
     }
 
-    const predictionId = prediction.id;
-
-    // Polling untuk hasilnya
-    let output = null;
-    while (!output) {
-      await new Promise((resolve) => setTimeout(resolve, 1500));
-
-      const pollResponse = await fetch(`https://api.replicate.com/v1/predictions/${predictionId}`, {
-        headers: {
-          Authorization: `Token ${process.env.REPLICATE_API_TOKEN}`,
-        },
-      });
-
-      const pollResult = await pollResponse.json();
-      if (pollResult.error) {
-        return res.status(500).json({ error: pollResult.error });
-      }
-
-      if (pollResult.status === "succeeded") {
-        output = pollResult.output;
-        break;
-      }
-
-      if (pollResult.status === "failed") {
-        return res.status(500).json({ error: "Restoration failed on Replicate." });
-      }
-    }
-
-    return res.status(200).json({ output });
+    return res.status(200).json(result);
   } catch (error) {
-    console.error("API error:", error);
-    return res.status(500).json({ error: "Something went wrong while restoring the image." });
+    console.error("Error during image restoration:", error);
+    return res.status(500).json({ error: "Failed to restore image" });
   }
-};
+                                 }
