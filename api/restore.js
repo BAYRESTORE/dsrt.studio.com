@@ -3,57 +3,61 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: "Method not allowed" });
   }
 
-  const image = req.body?.image;
+  const { image } = req.body;
   if (!image) {
     return res.status(400).json({ error: "No image provided" });
   }
 
   try {
-    const predictionResponse = await fetch("https://api.replicate.com/v1/predictions", {
+    const response = await fetch("https://api.replicate.com/v1/predictions", {
       method: "POST",
       headers: {
-        "Authorization": `Token ${process.env.REPLICATE_API_TOKEN}`,
-        "Content-Type": "application/json"
+        Authorization: `Token ${process.env.REPLICATE_API_TOKEN}`,
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
         version: "928d54a5e1394b8fb9e3792017d86f3f84b2aa6dd454df1c00f6f9e6d31c01cf", // Real-ESRGAN
-        input: { image }
-      })
+        input: { image },
+      }),
     });
 
-    const prediction = await predictionResponse.json();
+    const prediction = await response.json();
 
-    if (prediction?.error) {
+    if (prediction.error) {
       return res.status(500).json({ error: prediction.error });
     }
 
     const predictionId = prediction.id;
 
-    // Polling status sampai selesai
+    // Polling untuk hasilnya
     let output = null;
-    let status = prediction.status;
-    while (status !== "succeeded" && status !== "failed") {
-      await new Promise(r => setTimeout(r, 1500)); // delay 1.5 detik
+    while (!output) {
+      await new Promise((resolve) => setTimeout(resolve, 1500));
 
-      const checkResponse = await fetch(`https://api.replicate.com/v1/predictions/${predictionId}`, {
+      const pollResponse = await fetch(`https://api.replicate.com/v1/predictions/${predictionId}`, {
         headers: {
-          "Authorization": `Token ${process.env.REPLICATE_API_TOKEN}`,
-          "Content-Type": "application/json"
-        }
+          Authorization: `Token ${process.env.REPLICATE_API_TOKEN}`,
+        },
       });
 
-      const checkResult = await checkResponse.json();
-      status = checkResult.status;
-      output = checkResult.output;
+      const pollResult = await pollResponse.json();
+      if (pollResult.error) {
+        return res.status(500).json({ error: pollResult.error });
+      }
 
-      if (status === "failed") {
-        return res.status(500).json({ error: "Restore failed on Replicate side." });
+      if (pollResult.status === "succeeded") {
+        output = pollResult.output;
+        break;
+      }
+
+      if (pollResult.status === "failed") {
+        return res.status(500).json({ error: "Restoration failed on Replicate." });
       }
     }
 
     return res.status(200).json({ output });
-  } catch (err) {
-    console.error("Restore error:", err);
-    return res.status(500).json({ error: "Failed to restore image" });
+  } catch (error) {
+    console.error("API error:", error);
+    return res.status(500).json({ error: "Something went wrong while restoring the image." });
   }
 }
