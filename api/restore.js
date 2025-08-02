@@ -1,4 +1,6 @@
-export default async function handler(req, res) {
+const fetch = require("node-fetch");
+
+module.exports = async function handler(req, res) {
   if (req.method !== "POST") {
     return res.status(405).json({ error: "Method not allowed" });
   }
@@ -9,7 +11,6 @@ export default async function handler(req, res) {
   }
 
   try {
-    console.log("Sending request to Replicate...");
     const response = await fetch("https://api.replicate.com/v1/predictions", {
       method: "POST",
       headers: {
@@ -23,7 +24,6 @@ export default async function handler(req, res) {
     });
 
     const prediction = await response.json();
-    console.log("Replicate response:", prediction);
 
     if (prediction.error) {
       return res.status(500).json({ error: prediction.error });
@@ -31,6 +31,7 @@ export default async function handler(req, res) {
 
     const predictionId = prediction.id;
 
+    // Polling untuk hasilnya
     let output = null;
     while (!output) {
       await new Promise((resolve) => setTimeout(resolve, 1500));
@@ -42,8 +43,6 @@ export default async function handler(req, res) {
       });
 
       const pollResult = await pollResponse.json();
-      console.log("Polling result:", pollResult);
-
       if (pollResult.error) {
         return res.status(500).json({ error: pollResult.error });
       }
@@ -63,4 +62,4 @@ export default async function handler(req, res) {
     console.error("API error:", error);
     return res.status(500).json({ error: "Something went wrong while restoring the image." });
   }
-}
+};
