@@ -1,3 +1,7 @@
+![Vercel](https://img.shields.io/badge/Deploy-Vercel-black?logo=vercel)
+![Built with Replicate](https://img.shields.io/badge/AI-Real--ESRGAN-blueviolet?logo=replicate)
+![License](https://img.shields.io/badge/License-Educational-lightgrey)
+
 # DSRT STUDIO – AI RESTORE FOTO
 
 **DSRT Studio** adalah platform restorasi foto otomatis berbasis AI menggunakan model Real-ESRGAN & CodeFormer.  
