@@ -1,7 +1,25 @@
 export default async function handler(req, res) {
   if (req.method !== "POST") {
     return res.status(405).json({ error: "Method not allowed" });
-  }
+  }gitignore
+3 hours ago
+CODE_OF_CONDUCT.md
+2 hours ago
+CONTRIBUTING.md
+2 hours ago
+LICENSE
+2 hours ago
+README.md
+2 hours ago
+SECURITY.md
+2 hours ago
+index.html
+2 hours ago
+menu.html
+4 hours ago
+restore.html
+16 hours ago
+script.js
 
   const { image } = req.body;
   if (!image) {
