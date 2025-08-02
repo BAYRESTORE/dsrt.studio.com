@@ -1,55 +1,34 @@
-# 🛡️ SECURITY.md – Keamanan DSRT Studio
+# 🔐 Keamanan DSRT Studio
 
-Terima kasih atas minat Anda terhadap keamanan DSRT Studio.
+Kami memprioritaskan keamanan tingkat tinggi ("bintang 7") untuk semua pengguna. Jika kamu menemukan celah keamanan atau memiliki kekhawatiran terkait sistem, ikuti panduan di bawah ini.
 
-Platform ini dibangun dengan prioritas utama pada **privasi, integritas, dan keamanan pengguna**, terutama karena berhubungan dengan data visual (foto pribadi) yang sensitif.
+## 📧 Laporkan Masalah Keamanan
 
----
+Laporkan masalah keamanan ke:
 
-## 🔐 Kebijakan Keamanan
+**Email**: dsrt.official71@gmail.com  
+**Instagram**: [@dsrt.official.2025](https://instagram.com/dsrt.official.2025)
 
-### 1. Privasi Pengguna
-- Kami **tidak menyimpan foto pengguna** secara permanen. Semua file dihapus otomatis dari Supabase setelah pemrosesan selesai atau setelah waktu tertentu (jika berlaku).
-- Tidak ada sistem login wajib untuk 3x restore gratis. Kami tidak mengumpulkan data personal seperti email atau nomor HP secara default.
+> Jangan gunakan GitHub Issues untuk hal bersifat sensitif atau privat.
 
-### 2. Perlindungan Data
-- Semua file yang diproses hanya disimpan sementara di **Supabase Storage Bucket** dengan akses publik terbatas.
-- Tidak ada file yang dibagikan ke pihak ketiga.
+## ✅ Kebijakan Keamanan Kami
 
-### 3. Kontrol Konten NSFW
-- Sistem deteksi otomatis akan **menolak pemrosesan gambar tidak pantas**, khususnya foto wanita telanjang atau eksplisit.
-- Pria bertelanjang dada dan anak-anak tanpa baju diperbolehkan selama **tidak mengekspos alat kelamin secara eksplisit**.
+- Deteksi NSFW otomatis (wanita telanjang ditolak).
+- Data pengguna tidak disimpan secara pribadi tanpa izin.
+- Gambar diunggah dengan validasi & diproses secara sementara.
+- Sistem anti-spam & abuse (rate limit, validasi format, dsb).
+- Tidak ada pengumpulan informasi pribadi dari pengguna non-login.
+- Seluruh pemrosesan dilakukan di lingkungan aman & diawasi.
 
-### 4. Perlindungan Abuse & Spam
-- Batasan restore gratis hanya 3 kali tanpa login.
-- Setelah itu, sistem akan **menambahkan watermark + efek blur + ikon gembok** pada hasil, kecuali pengguna mengambil opsi restore manual atau berbayar (jika tersedia).
+## 🧪 Pengujian Keamanan
 
----
+Setiap perubahan diuji untuk:
 
-## 🧰 Teknologi yang Digunakan
+- Konsistensi sistem watermark, slider, blur & ikon gembok.
+- Deteksi NSFW tetap aktif di semua restore.
+- Tidak ada kebocoran API Key Replicate atau Supabase.
+- Tidak ada celah XSS, file injection, atau bypass sistem restore.
 
-- **Vercel Serverless Functions** – Tidak menyimpan file di server permanen.
-- **Supabase** – Penyimpanan file sementara (bucket publik diawasi).
-- **Replicate (Real-ESRGAN + CodeFormer)** – Dipanggil secara real-time tanpa cache permanen.
+## 🔒 Komitmen
 
----
-
-## 📣 Laporkan Kerentanan
-
-Jika Anda menemukan celah keamanan, silakan laporkan segera ke:
-
-📧 **dsrt.official71@gmail.com**
-
-Kami berkomitmen untuk:
-- Menanggapi laporan dalam **48 jam**
-- Memperbaiki isu keamanan kritis dalam **7 hari kerja** (jika memungkinkan)
-
----
-
-## 🤝 Transparansi
-
-Kami mendukung prinsip keamanan terbuka (open security). Semua kode sumber tersedia secara publik dan dapat diaudit oleh siapa saja di GitHub.
-
----
-
-Terima kasih atas perhatian dan bantuannya menjaga DSRT Studio tetap aman 💙
+Kami berkomitmen menjaga keamanan pengguna dan data mereka. Terima kasih telah membantu menjaga DSRT Studio tetap aman dan terpercaya.
