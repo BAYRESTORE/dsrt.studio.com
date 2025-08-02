@@ -2,14 +2,30 @@
 
 ## Supported Versions
 
-We commit to keeping the platform secure and stable. Only the latest deployed version is actively supported.
+| Version | Supported |
+| ------- | --------- |
+| 1.x     | ✅        |
+| <1.0    | ❌        |
 
 ## Reporting a Vulnerability
 
-If you discover a security issue or vulnerability, **please do not open a public GitHub issue**. Instead, report it privately:
+Jika kamu menemukan celah keamanan, silakan hubungi kami secara privat di:
 
-- Email: dsrtstudio.security@gmail.com *(ganti jika ada email resmi)*
-- Subject: `[SECURITY] Vulnerability Report`
-- Please include as much detail as possible to help us understand and resolve the issue quickly.
+📧 **dsrt.official71@gmail.com**
 
-We take all reports seriously and will respond promptly.
+Mohon untuk **tidak membuka issue publik** agar kami dapat menyelesaikannya dengan aman.
+
+## Kebijakan Keamanan Platform
+
+- Tidak menyimpan data pribadi pengguna
+- Tidak ada sistem login selama mode gratis
+- Tidak menggunakan webhook pihak ketiga
+- Semua proses dilakukan secara serverless melalui Vercel
+- AI filter mendeteksi otomatis konten NSFW
+- Setelah penggunaan ke-3, sistem otomatis memberi watermark, efek blur, dan ikon gembok
+- Semua file gambar tersimpan di Supabase Bucket yang diamankan
+- Tidak ada cookie, tracking, atau fingerprinting pengguna
+
+---
+
+🛡️ Komitmen kami: menjaga keamanan, privasi, dan transparansi bagi semua pengguna DSRT Studio.
