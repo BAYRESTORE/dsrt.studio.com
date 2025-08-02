@@ -2,13 +2,14 @@ export default async function handler(req, res) {
   if (req.method !== "POST") {
     return res.status(405).json({ error: "Method not allowed" });
   }
+
   try {
     const { image } = req.body;
     if (!image) {
       return res.status(400).json({ error: "No image provided" });
     }
 
-    const replicateRes = await fetch("https://api.replicate.com/v1/predictions", {
+    const replicateResponse = await fetch("https://api.replicate.com/v1/predictions", {
       method: "POST",
       headers: {
         Authorization: `Token ${process.env.REPLICATE_API_TOKEN}`,
@@ -24,16 +25,9 @@ export default async function handler(req, res) {
       }),
     });
 
-    const prediction = await replicateRes.json();
+    const prediction = await replicateResponse.json();
 
-    if (!prediction.output || prediction.output.length === 0) {
-      return res.status(500).json({ error: "No output from model" });
-    }
-
-    // Ambil hasil restore, biasanya array output, ambil yang pertama
-    const restoredUrl = Array.isArray(prediction.output) ? prediction.output[0] : prediction.output;
-
-    res.status(200).json({ restored: restoredUrl });
+    res.status(200).json({ restored: prediction.output[0] || prediction.output });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
