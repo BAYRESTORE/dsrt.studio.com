@@ -1,45 +1,33 @@
-// File: api/restore.js
-
+// api/restore.js
 export default async function handler(req, res) {
-  if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Only POST requests allowed' });
-  }
-
-  const replicateApiToken = process.env.REPLICATE_API_TOKEN;
-  if (!replicateApiToken) {
-    return res.status(500).json({ error: 'Missing Replicate API token in environment variables' });
-  }
-
-  const { image } = req.body;
+  const image = req.body?.image;
 
   if (!image) {
-    return res.status(400).json({ error: 'Image URL is required in request body' });
+    return res.status(400).json({ error: "No image provided" });
   }
 
   try {
-    const response = await fetch('https://api.replicate.com/v1/predictions', {
-      method: 'POST',
+    const response = await fetch("https://api.replicate.com/v1/predictions", {
+      method: "POST",
       headers: {
-        'Authorization': `Token ${replicateApiToken}`,
-        'Content-Type': 'application/json'
+        "Authorization": `Token ${process.env.REPLICATE_API_TOKEN}`,
+        "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        version: '928ef5edc0b9199e9c3d56dbb0b929be0f6c6b5e9d9fbf67ecf1c3b31c3f041e', // Real-ESRGAN model
-        input: {
-          img: image
-        }
+        version: "928d54a5e1394b8fb9e3792017d86f3f84b2aa6dd454df1c00f6f9e6d31c01cf", // Real-ESRGAN
+        input: { image }
       })
     });
 
-    const json = await response.json();
+    const result = await response.json();
 
-    if (json?.error) {
-      return res.status(500).json({ error: json.error });
+    if (result?.error) {
+      return res.status(500).json({ error: result.error });
     }
 
-    res.status(200).json(json);
+    return res.status(200).json({ output: result });
   } catch (err) {
-    console.error('Restore error:', err);
-    res.status(500).json({ error: 'Something went wrong with restore request' });
+    console.error(err);
+    return res.status(500).json({ error: "Failed to restore image" });
   }
 }
