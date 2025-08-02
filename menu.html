@@ -2,48 +2,182 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>DSRT STUDIO</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DSRT Studio - Restore</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background: #f2f2f2;
-      margin: 0;
-      padding: 0;
+      font-family: sans-serif;
+      padding: 20px;
+      background: #f0f0f0;
     }
-    header {
-      background: #222;
-      color: #fff;
-      padding: 1rem;
-      text-align: center;
+    #resultSection {
+      display: none;
+      margin-top: 20px;
+      position: relative;
     }
-    main {
-      padding: 2rem;
-      text-align: center;
+    .slider-wrapper {
+      position: relative;
+      width: 100%;
+      max-width: 600px;
+      margin: auto;
     }
-    .btn {
-      display: inline-block;
-      background: #0070f3;
-      color: #fff;
-      padding: 1rem 2rem;
-      margin: 1rem;
-      border-radius: 8px;
-      text-decoration: none;
-      transition: background 0.3s;
+    .slider-wrapper img {
+      width: 100%;
+      height: auto;
+      position: absolute;
+      top: 0;
+      left: 0;
     }
-    .btn:hover {
-      background: #0051c3;
+    #beforeImage {
+      z-index: 1;
+    }
+    #afterImage {
+      z-index: 2;
+    }
+    #slider {
+      width: 100%;
+      margin-top: 320px;
+      position: relative;
+      z-index: 3;
+    }
+    #watermarkControl,
+    #lockedOverlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 4;
+      pointer-events: none;
+    }
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
     }
   </style>
 </head>
 <body>
-  <header>
-    <h1>DSRT STUDIO - RESTORE FOTO AI</h1>
-  </header>
-  <main>
-    <p>Selamat datang! Layanan restorasi otomatis dengan AI.</p>
-    <a href="/restore.html" class="btn">Mulai Restore Sekarang</a>
-    <a href="https://www.facebook.com/groups/..." target="_blank" class="btn">Grup FB Kami</a>
-  </main>
+  <h1>DSRT Studio: AI Photo Restore</h1>
+  <input type="file" id="uploadInput" accept="image/*" />
+  <button id="restoreBtn">Mulai Restore</button>
+
+  <div id="resultSection">
+    <div class="slider-wrapper">
+      <img id="beforeImage" src="" alt="Before" />
+      <img id="afterImage" src="" alt="After" />
+      <div id="watermarkControl"></div>
+      <div id="lockedOverlay"></div>
+      <input type="range" id="slider" min="0" max="100" value="50" />
+    </div>
+    <button id="downloadBtn">Unduh</button>
+    <button id="printBtn">Cetak</button>
+  </div>
+
+  <script>
+    const uploadInput = document.getElementById('uploadInput');
+    const restoreBtn = document.getElementById('restoreBtn');
+    const resultSection = document.getElementById('resultSection');
+    const beforeImage = document.getElementById('beforeImage');
+    const afterImage = document.getElementById('afterImage');
+    const slider = document.getElementById('slider');
+    const watermarkControl = document.getElementById('watermarkControl');
+    const lockedOverlay = document.getElementById('lockedOverlay');
+    const downloadBtn = document.getElementById('downloadBtn');
+    const printBtn = document.getElementById('printBtn');
+
+    const watermarkUrl = 'https://cacwogekvnrrmmnjtmql.supabase.co/storage/v1/object/public/restore//file_00000000b41061f796a38f3d9fb3a9ae.png';
+    let restoreCount = parseInt(localStorage.getItem('restoreCount')) || 0;
+
+    slider.addEventListener('input', () => {
+      const value = slider.value;
+      beforeImage.style.clipPath = `inset(0 ${100 - value}% 0 0)`;
+      afterImage.style.clipPath = `inset(0 0 0 ${value}%)`;
+    });
+
+    restoreBtn.addEventListener('click', async () => {
+      const file = uploadInput.files[0];
+      if (!file) return alert('Pilih gambar terlebih dahulu.');
+
+      const formData = new FormData();
+      formData.append('image', file);
+
+      const res = await fetch('/api/restore', {
+        method: 'POST',
+        body: formData,
+      });
+      const data = await res.json();
+      if (!data || !data.output_url) return alert('Gagal restore.');
+
+      beforeImage.src = URL.createObjectURL(file);
+      afterImage.src = data.output_url;
+      resultSection.style.display = 'block';
+
+      restoreCount++;
+      localStorage.setItem('restoreCount', restoreCount);
+      updateWatermark();
+    });
+
+    function updateWatermark() {
+      watermarkControl.innerHTML = '';
+      lockedOverlay.innerHTML = '';
+      afterImage.style.filter = '';
+      afterImage.style.position = 'relative';
+
+      if (restoreCount <= 3) {
+        const watermark = document.createElement('img');
+        watermark.src = watermarkUrl;
+        watermark.style.position = 'absolute';
+        watermark.style.top = 0;
+        watermark.style.left = 0;
+        watermark.style.width = '100%';
+        watermark.style.opacity = '0.5';
+        watermark.style.pointerEvents = 'none';
+        watermark.id = 'watermarkImg';
+
+        const closeBtn = document.createElement('button');
+        closeBtn.innerText = 'X';
+        closeBtn.style.position = 'absolute';
+        closeBtn.style.top = '10px';
+        closeBtn.style.right = '10px';
+        closeBtn.style.pointerEvents = 'auto';
+        closeBtn.onclick = () => watermark.remove();
+
+        watermarkControl.appendChild(watermark);
+        watermarkControl.appendChild(closeBtn);
+      } else {
+        afterImage.style.filter = 'blur(5px)';
+        const lockIcon = document.createElement('div');
+        lockIcon.innerText = '🔒';
+        lockIcon.style.position = 'absolute';
+        lockIcon.style.top = '50%';
+        lockIcon.style.left = '50%';
+        lockIcon.style.transform = 'translate(-50%, -50%)';
+        lockIcon.style.fontSize = '48px';
+        lockedOverlay.appendChild(lockIcon);
+
+        const watermark = document.createElement('img');
+        watermark.src = watermarkUrl;
+        watermark.style.position = 'absolute';
+        watermark.style.top = 0;
+        watermark.style.left = 0;
+        watermark.style.width = '100%';
+        watermark.style.opacity = '0.7';
+        watermarkControl.appendChild(watermark);
+      }
+    }
+
+    downloadBtn.addEventListener('click', () => {
+      const link = document.createElement('a');
+      link.href = afterImage.src;
+      link.download = 'restored-image.jpg';
+      link.click();
+    });
+
+    printBtn.addEventListener('click', () => {
+      const win = window.open('', '_blank');
+      win.document.write(`<img src="${afterImage.src}" style="width:100%">`);
+      win.print();
+    });
+  </script>
 </body>
 </html>
