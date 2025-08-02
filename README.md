@@ -1,193 +1,187 @@
 ---
 
-  
+📁 Struktur Folder
 
-DSRT STUDIO – AI RESTORASI FOTO
-
-DSRT Studio adalah platform restorasi dan peningkatan foto berbasis AI yang memperbaiki gambar rusak, buram, atau kuno tanpa mengubah identitas wajah dan menjaga warna natural.
-Dibangun secara mandiri oleh DSRT, platform ini menggabungkan teknologi Real-ESRGAN dan CodeFormer serta sistem serverless modern yang ringan dan cepat.
-
-
----
-
-🎯 Fitur Unggulan
-
-🔓 Restore otomatis tanpa login (3x gratis per device)
-
-🔁 Slider before–after interaktif
-
-💧 Watermark DSRT transparan otomatis
-
-🔒 Efek blur & ikon gembok setelah restore ke-4
-
-⚡ Serverless backend (api/restore.js via Vercel)
-
-🧠 AI Engine: Real-ESRGAN (Replicate)
-
-💡 Frontend: HTML, CSS, JavaScript (tanpa framework)
-
-📱 Desain responsive untuk mobile & desktop
-
-
-
----
-
-🧰 Struktur Proyek
-
-.
-├── index.html          # Halaman utama (landing page)
-├── restore.html        # Halaman restore AI otomatis
+DSRT-Studio/
+├── index.html             # Landing page
+├── restore.html           # Halaman AI Restore
+├── manual.html            # Halaman Manual Restore (photoshop, editing, dll)
 ├── api/
-│   └── restore.js      # Serverless backend (Vercel)
+│   └── restore.js         # Serverless backend Real-ESRGAN via Replicate
 ├── public/
-│   └── script.js       # Logic restore, slider, watermark, dsb
-├── /manual/
-│   └── manual.html     # Halaman layanan restore manual & cetak
-├── README.md           # Dokumentasi proyek (ini)
+│   └── script.js          # Logic restore, slider, watermark, dll
+├── assets/
+│   ├── logo/              # Logo, favicon, spanduk, banner, neonbox
+│   └── watermark/         # Gambar watermark DSRT transparan dari Supabase
+├── .gitignore
+├── LICENSE
+└── README.md
 
 
 ---
 
-⚙️ Cara Deploy
+✅ README.md (Final)
 
-1. Vercel Setup
+# DSRT STUDIO – AI RESTORASI FOTO
 
-Buat akun di vercel.com, hubungkan repo GitHub kamu
+**DSRT Studio** adalah platform restorasi foto otomatis berbasis AI (Real-ESRGAN & CodeFormer), dan juga menyediakan layanan **manual retouching** untuk hasil yang lebih presisi.  
+Cocok untuk memperbaiki foto lama, rusak, blur, atau berwarna kusam — dengan menjaga bentuk wajah, warna asli, dan detail utuh.
 
-Pastikan file api/restore.js dikenali sebagai serverless function
+---
 
+## 🔧 Fitur Utama
 
-2. Replicate API Token
+- ✅ Restore otomatis tanpa login (3x gratis)
+- ✅ Slider before-after interaktif (desktop & mobile)
+- ✅ Watermark DSRT transparan otomatis
+- ✅ Efek blur + ikon gembok setelah restore ke-4
+- ✅ Tombol download dan cetak berbagai resolusi
+- ✅ Backend serverless (Vercel + Replicate)
+- ✅ Penyimpanan watermark di Supabase
+- ✅ Tidak mengubah bentuk wajah & latar asli
+- ✅ Versi manual editing untuk hasil premium
 
-Tambahkan di Vercel → Project Settings → Environment Variables:
+---
 
-Name	Value
+## 🧰 Tools Manual
 
-REPLICATE_API_TOKEN	(masukkan token Replicate kamu)
+Kami juga menyediakan layanan **manual retouching** oleh editor profesional:  
+- Pemulihan warna artistik
+- Retouch wajah, pencahayaan, noise, tone
+- Restore baju, latar, detail kompleks
+- Bisa request spanduk, logo, neonbox, dll
 
+---
 
-> Token didapat dari: https://replicate.com/account
+## ⚙️ Cara Deploy
 
+### 1. Vercel Setup
+- Buat akun Vercel, hubungkan repo GitHub kamu
+- Pastikan `api/restore.js` dikenali sebagai serverless function
 
+### 2. Replicate API Key
+Tambahkan di **Vercel → Project Settings → Environment Variables**:
 
-3. Supabase (Untuk Gambar Watermark)
+| Name                 | Value                        |
+|----------------------|------------------------------|
+| `REPLICATE_API_TOKEN` | (isi token kamu)             |
 
-Buat akun di supabase.com
+### 3. Supabase Bucket untuk Watermark
+Gunakan Supabase sebagai storage gambar:  
+Simpan watermark transparan DSRT di folder `restore/`.
 
-Upload watermark DSRT (format transparan PNG) ke bucket bernama restore/
+Contoh URL watermark transparan:
 
-Simpan URL public watermark seperti ini:
+https://cacwogekvnrrmmnjtmql.supabase.co/storage/v1/object/public/restore/file_00000000b41061f796a38f3d9fb3a9ae.png
 
+---
 
-https://your-project.supabase.co/storage/v1/object/public/restore/namafile.png
+## 📁 Struktur Folder
 
-> URL ini nanti dipakai di script.js untuk menambahkan watermark pada hasil restore.
+Lihat file dan folder yang disarankan pada repositori ini:
 
+- `index.html` – Halaman landing
+- `restore.html` – Halaman utama AI restore
+- `manual.html` – Halaman info layanan manual
+- `api/restore.js` – Backend AI restore (Real-ESRGAN)
+- `public/script.js` – Logic restore, slider, watermark
+- `assets/logo/` – Logo, spanduk, neonbox, dll
+- `assets/watermark/` – Gambar watermark transparan
 
+---
+
+## 🧠 Teknologi Digunakan
+
+- [Real-ESRGAN (Replicate)](https://replicate.com/sczhou/real-esrgan)
+- [Vercel Serverless Functions](https://vercel.com/docs/functions)
+- Supabase (image storage)
+- HTML, CSS, JS (tanpa framework)
+- Slider before-after interaktif
+- localStorage (untuk menghitung kuota gratis)
+- Efek canvas + watermark + blur
+
+---
+
+## 👤 Target Pengguna
+
+- Pengguna Facebook grup editing/restorasi
+- Pemilik foto lama, keluarga, pernikahan, dsb.
+- Fotografer pemula/pakar
+- UMKM, desainer, cetak banner/logo/neonbox
+
+---
+
+## 🧾 Lisensi
+
+Proyek ini menggunakan lisensi MIT (lihat file `LICENSE`).  
+Untuk penggunaan komersial layanan manual, hubungi DSRT Studio langsung.
+
+---
+
+## 🙌 Kredit
+
+> Dibuat dan dikembangkan oleh **DSRT**  
+> 🇮🇩 Indonesia – 2025
+
+---
+
+Terima kasih telah menggunakan DSRT Studio.  
+**Silakan restore, unduh, atau hubungi kami untuk editing manual!**
 
 
 ---
 
-💼 Layanan Tambahan (Manual)
+✅ LICENSE (MIT)
 
-DSRT Studio juga menyediakan halaman khusus untuk:
+Buat file LICENSE di root dan isi:
 
-✏️ Restore manual (oleh editor manusia)
+MIT License
 
-🖨️ Cetak & desain fisik: banner, neonbox, undangan, dan spanduk
+Copyright (c) 2025 DSRT
 
-📥 Form request custom desain langsung dari website
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the “Software”), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, subject to the following conditions:
 
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
 
-> Tersedia di: /manual/manual.html (bisa disesuaikan)
-
-
-
-
----
-
-👤 Target Pengguna
-
-Anggota grup Facebook restorasi/editing foto
-
-Pemilik foto keluarga lama yang rusak/buram
-
-Desainer yang ingin cetak hasil restorasi
-
-Siapa saja yang ingin coba AI enhancer gratis
-
+THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
 
 
 ---
 
-🚀 Roadmap (Tahapan Pengembangan)
+✅ .gitignore
 
-[x] Restore AI Real-ESRGAN
+Buat file .gitignore dan isi dengan:
 
-[x] Slider Before–After
+# Node
+node_modules/
+npm-debug.log
+.env
 
-[x] Sistem 3x gratis dengan localStorage
+# OS
+.DS_Store
+Thumbs.db
 
-[x] Efek blur dan watermark DSRT otomatis
+# Vercel
+.vercel
 
-[x] Unduh/cetak hasil berbagai resolusi
+# Supabase & secrets
+.supabase/
+*.key
+*.env
 
-[ ] Integrasi CodeFormer (peningkatan wajah)
-
-[ ] Notifikasi hasil restore selesai
-
-[ ] User dashboard login Supabase (opsional)
-
-[ ] Riwayat restore tersimpan
-
-
-
----
-
-🧠 Teknologi yang Digunakan
-
-Komponen	Teknologi
-
-AI Engine	Real-ESRGAN (Replicate)
-Serverless	Vercel Functions
-Penyimpanan	Supabase Storage
-Frontend	HTML, CSS, JavaScript
-Penghitung batas	localStorage JS
-
-
-
----
-
-📄 Lisensi
-
-Open-source untuk keperluan edukasi dan non-komersial.
-Untuk kolaborasi, izin komersial, atau integrasi profesional, silakan hubungi DSRT langsung.
-
-
----
-
-🙌 Kredit
-
-> Dibangun secara mandiri oleh DSRT 🇮🇩
-Dirancang untuk masyarakat yang ingin menghidupkan kembali kenangan lewat foto.
-
-
-
-
----
-
-🌐 Demo Live
-
-> 💻 https://dsrt-studio-com.vercel.app
-⚙️ Backend API
-
-
-
-
----
-
-Terima kasih telah menggunakan DSRT Studio!
-Silakan fork, gunakan, dan kembangkan sesuai kebutuhan 🙏
+# Output
+output/
 
 
 ---
